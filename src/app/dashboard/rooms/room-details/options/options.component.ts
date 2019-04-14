@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-answers',
-  templateUrl: './answers.component.html',
-  styleUrls: ['./answers.component.scss']
+  selector: 'app-options',
+  templateUrl: './options.component.html',
+  styleUrls: ['./options.component.scss']
 })
-export class AnswersComponent implements OnInit {
+export class OptionsComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   onCheckboxClick(item: any): void {
@@ -37,4 +38,5 @@ export class AnswersComponent implements OnInit {
     // this.textToPrint = [];
     // this.getTextStart(this.textToPrint.length);
   }
+
 }

@@ -28,7 +28,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/normalize.css/normalize.css"
+              "node_modules/normalize.css/normalize.css",
+              "src/assets/fontawesome-all.css"
             ],
             "scripts": []
           },

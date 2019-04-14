@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const OptionsSchema = new Schema({
+const SettingsSchema = new Schema({
   label: String,
   text: String,
   isChecked: {type: Boolean, default: false},
@@ -25,7 +25,8 @@ const ConfigSchema = new Schema({
 });
 
 const RoomSettingsSchema = new Schema({
-  options: OptionsSchema,
+  roomId: String,
+  options: SettingsSchema,
   config: ConfigSchema
 });
 

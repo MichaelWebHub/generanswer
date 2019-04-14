@@ -1,6 +1,6 @@
-<div class="config__global-wrapper">
+<div class="config__global-wrapper" *ngIf="dataLoaded$ | async">
   <div class="config__container">
-    <div class="back-button">
+    <div class="back-button" (click)="onBackButtonClick()">
       <i class="fal fa-arrow-left"></i>
       <p class="back-button__label"> Back </p>
     </div>
@@ -26,20 +26,20 @@
     </form>
 
     <form class="config-form" #configEditForm="ngForm" (submit)="onEditCheckBoxSubmit(configEditForm)"
-          *ngIf="aOptions.length > 0">
+          *ngIf="(options$ | async).length > 0">
 
-      <div class="form-group" *ngFor="let option of aOptions; let i = index" ngModelGroup="data-{{i}}">
+      <div class="form-group" *ngFor="let option of (options$ | async); let i = index" ngModelGroup="data-{{i}}">
 
         <input type="text" name="_id" [ngModel]="option._id" class="hidden">
 
         <div class="config-form__row">
           <p class="config-label"> Label: </p>
-          <input type="text" class="config-input" name="sLabel" [ngModel]="option.sLabel" autocomplete="off">
+          <input type="text" class="config-input" name="sLabel" [ngModel]="option.label" autocomplete="off">
         </div>
 
         <div class="config-form__row">
           <p class="config-label"> Text: </p>
-          <textarea type="text" class="config-textarea" name="sText" [ngModel]="option.sText"
+          <textarea type="text" class="config-textarea" name="sText" [ngModel]="option.text"
                     autocomplete="off"></textarea>
         </div>
 
@@ -62,14 +62,15 @@
 
       <div class="config-form__row">
         <p class="config-label"> Greetings: </p>
-        <input type="text" class="config-input" name="sTextGreetings" [ngModel]="oConfig.sTextGreetings"
+        <input type="text" class="config-input" name="sTextGreetings" [ngModel]="(config$ | async).textGreetings"
                autocomplete="off">
       </div>
 
       <div class="config-form__row">
         <p class="config-label"> Show start text: </p>
         <label class="custom__checkbox">
-          <input type="checkbox" class="config-checkbox hidden" name="bShowStartText" [ngModel]="oConfig.bShowStartText"
+          <input type="checkbox" class="config-checkbox hidden" name="bShowStartText"
+                 [ngModel]="(config$ | async).showStartText"
                  autocomplete="off">
           <span class="config-checkbox__custom"> <i class="fal fa-check"></i></span></label>
       </div>
@@ -80,7 +81,7 @@
           <input type="text" class="config-input start-text__input"
                  [name]="'sTextStart-' + i"
                  [ngModel]="input" autocomplete="off"
-                 *ngFor="let input of oConfig.aTextStart; let i = index"
+                 *ngFor="let input of (config$ | async).textStart; let i = index"
                  [placeholder]="'If ' + (i + 1) + ' option(s) checked...'">
           <div class="add-input__button" (click)="addInput(1)"><i class="fal fa-plus"></i></div>
         </div>
@@ -89,7 +90,8 @@
       <div class="config-form__row">
         <p class="config-label"> Enumerable list: </p>
         <label class="custom__checkbox">
-          <input type="checkbox" class="config-checkbox hidden" name="bIsEnumerable" [ngModel]="oConfig.bIsEnumerable"
+          <input type="checkbox" class="config-checkbox hidden" name="bIsEnumerable"
+                 [ngModel]="(config$ | async).isEnumerable"
                  autocomplete="off">
           <span class="config-checkbox__custom"> <i class="fal fa-check"></i></span></label>
       </div>
@@ -97,14 +99,15 @@
       <div class="config-form__row">
         <p class="config-label"> Show end text: </p>
         <label class="custom__checkbox">
-          <input type="checkbox" class="config-checkbox hidden" name="bShowEndText" [ngModel]="oConfig.bShowEndText"
+          <input type="checkbox" class="config-checkbox hidden" name="bShowEndText"
+                 [ngModel]="(config$ | async).showEndText"
                  autocomplete="off">
           <span class="config-checkbox__custom"> <i class="fal fa-check"></i></span></label>
       </div>
 
       <div class="config-form__row config-form__row--align-top">
         <p class="config-label"> End phrase: </p>
-        <textarea type="text" class="config-textarea" name="sTextEnd" [ngModel]="oConfig.sTextEnd"
+        <textarea type="text" class="config-textarea" name="sTextEnd" [ngModel]="(config$ | async).textEnd"
                   autocomplete="off"></textarea>
       </div>
 

@@ -4,6 +4,7 @@ const jsonParser = require('body-parser').json();
 
 const {signUp, logIn, verifyToken, checkToken} = require('./backend/auth');
 const {getRooms, createRoom} = require('./backend/rooms');
+const {getSettings} = require('./backend/options');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -50,6 +51,15 @@ app.get('/getRooms/:userId', (req, res) => {
 /** Create new room */
 app.post('/createRoom', jsonParser, (req, res) => {
   createRoom(req, res).then(r => {
+    res.json(r);
+  })
+});
+
+/************************** Room Settings **************************/
+
+/** Get rooms' settings */
+app.get('/getSettings/:roomId', (req, res) => {
+  getSettings(req, res).then(r => {
     res.json(r);
   })
 });

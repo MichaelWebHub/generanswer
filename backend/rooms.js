@@ -1,5 +1,6 @@
 const db = require('../database/connection');
 const Rooms = require('../database/rooms.schema');
+const RoomSettings = require('../database/settings.schema');
 const MESSAGE = require('./_common');
 
 const getRooms = (req, res) => {
@@ -37,6 +38,33 @@ const createRoom = (req, res) => {
 
         room.save()
           .then((result) => {
+
+              const options = new RoomSettings({
+                roomId: result._id,
+                options: {
+                  label: '',
+                  text: '',
+                  isChecked: false,
+                  isNewLine: true
+                },
+                config: {
+                  connectGreetingsToTime: false,
+                  textGreetings: '',
+                  textEnd: '',
+                  textStart: [],
+                  configAreaTheme: '',
+                  configAreaTextColor: '',
+                  textAreaTheme: '',
+                  textAreaTextColor: '',
+                  textAreaCopyBackground: '',
+                  isEnumerable: true,
+                  showStartText: true,
+                  showEndText: false
+                }
+              });
+
+              options.save();
+
               resolve({
                 status: true,
                 room: result

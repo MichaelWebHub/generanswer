@@ -21,9 +21,11 @@ import {RoomsComponent} from './dashboard/rooms/rooms.component';
 import {RoomDetailsComponent} from './dashboard/rooms/room-details/room-details.component';
 import {RoomsEffects} from './_store/effects/rooms.effects';
 import {RoomsReducer} from './_store/reducers/rooms.reducer';
-import { AnswersComponent } from './dashboard/rooms/room-details/answers/answers.component';
-import { ResultComponent } from './dashboard/rooms/room-details/result/result.component';
-import { SettingsComponent } from './dashboard/rooms/room-details/settings/settings.component';
+import {ResultComponent} from './dashboard/rooms/room-details/result/result.component';
+import {SettingsComponent} from './dashboard/rooms/room-details/settings/settings.component';
+import {OptionsComponent} from './dashboard/rooms/room-details/options/options.component';
+import {SettingsEffects} from './_store/effects/settings.effects';
+import {SettingsReducer} from './_store/reducers/settings.reducer';
 
 @NgModule({
   declarations: [
@@ -32,9 +34,9 @@ import { SettingsComponent } from './dashboard/rooms/room-details/settings/setti
     HeaderComponent,
     RoomsComponent,
     RoomDetailsComponent,
-    AnswersComponent,
     ResultComponent,
-    SettingsComponent
+    SettingsComponent,
+    OptionsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
@@ -42,11 +44,13 @@ import { SettingsComponent } from './dashboard/rooms/room-details/settings/setti
     StoreModule.forRoot({}),
     NgrxActionsModule.forRoot({
       auth: AuthReducer,
-      rooms: RoomsReducer
+      rooms: RoomsReducer,
+      settings: SettingsReducer
     }),
     EffectsModule.forRoot([
       AuthEffects,
-      RoomsEffects
+      RoomsEffects,
+      SettingsEffects
     ]),
     StoreDevtoolsModule.instrument(),
     HttpClientModule,

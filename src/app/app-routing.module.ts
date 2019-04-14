@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './auth/auth-guard.service';
 import {RoomsComponent} from './dashboard/rooms/rooms.component';
 import {RoomDetailsComponent} from './dashboard/rooms/room-details/room-details.component';
+import {SettingsComponent} from './dashboard/rooms/room-details/settings/settings.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'rooms/:roomId',
         component: RoomDetailsComponent
+      },
+      {
+        path: 'rooms/:roomId/settings',
+        component: SettingsComponent
       },
       {
         path: '',
