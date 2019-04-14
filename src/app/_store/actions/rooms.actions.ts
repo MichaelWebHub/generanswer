@@ -1,0 +1,46 @@
+import {Action} from '@ngrx/store';
+import {IRoom} from '../interfaces/rooms.interface';
+
+export class CreateRoomPending implements Action {
+  public readonly type = '[Rooms] Create room pending';
+
+  constructor(public payload: { userId: string, name: string }) {
+  }
+}
+
+export class CreateRoomSuccess implements Action {
+  public readonly type = '[Rooms] Create room success';
+
+  constructor(public payload: IRoom) {
+  }
+}
+
+export class CreateRoomError implements Action {
+  public readonly type = '[Rooms] Create room error';
+
+  constructor(public payload: string) {
+  }
+}
+
+/** ---------------------------------------------------- */
+
+export class GetRoomsPending implements Action {
+  public readonly type = '[Rooms] Get rooms pending';
+
+  constructor(public payload: string) {
+  }
+}
+
+export class GetRoomsSuccess implements Action {
+  public readonly type = '[Rooms] Get room success';
+
+  constructor(public payload: IRoom[]) {
+  }
+}
+
+export class GetRoomsError implements Action {
+  public readonly type = '[Rooms] Get room error';
+
+  constructor(public payload: string) {
+  }
+}

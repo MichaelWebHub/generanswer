@@ -1,9 +1,16 @@
 @import "../../_utils/index";
 
+.container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .form {
-  max-width: 500px;
+  width: 500px;
   padding: 3.125rem;
-  background: $primary300;
+  background: $green;
   border-radius: $borderRadius;
 }
 
@@ -30,7 +37,7 @@
 }
 
 .form__footer-link {
-  color: $lightGrey;
+  color: #fff;
   font-weight: 600;
   cursor: pointer;
 }

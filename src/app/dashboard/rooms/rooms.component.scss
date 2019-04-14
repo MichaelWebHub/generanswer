@@ -1,0 +1,63 @@
+@import "../../_utils/index";
+
+.rooms {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.room {
+  width: calc(100% / 3);
+  height: 10rem;
+  padding: 1rem;
+}
+
+.room-form .room__inner {
+  cursor: default;
+}
+
+.room__inner {
+  padding: 0.875rem;
+  height: 100%;
+  margin: 0 auto;
+  border-radius: 1rem;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.room__title {
+  color: $darkGrey300;
+  font-weight: 400;
+}
+
+.room-create__input {
+  display: block;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.3125rem;
+}
+
+.room-create__input.hidden {
+  display: none;
+}
+
+.room-create__submit {
+  margin-top: 0.625rem;
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid $green;
+  border-radius: 0.3125rem;
+  cursor: pointer;
+  background: $green;
+  color: #efefef;
+  font-weight: 500;
+}
+
+.room-create__form {
+  width: 80%;
+  height: 100%;
+}

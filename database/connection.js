@@ -4,7 +4,7 @@ const db_config = require('../config/database');
 function db() {
   return new Promise(function(resolve, reject) {
 
-    mongoose.connect(db_config.globalUri, {useNewUrlParser: true});
+    mongoose.connect(db_config.localUri, {useNewUrlParser: true});
 
     mongoose.connection.once('open', function() {
       resolve("Connection has been made.");

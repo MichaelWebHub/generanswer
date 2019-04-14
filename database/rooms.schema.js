@@ -26,11 +26,7 @@ const ConfigSchema = new Schema({
 
 const RoomSchema = new Schema({
   userId: String,
-  oRoom: {
-    sName: String,
-    aOptions: [OptionsSchema],
-    oConfig: {type: ConfigSchema}
-  }
+  name: String,
 });
 
 

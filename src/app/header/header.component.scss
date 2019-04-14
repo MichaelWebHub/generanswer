@@ -1,0 +1,21 @@
+@import '../_utils/index';
+
+.header {
+  height: rem(60px);
+  background: $green;
+  padding: 0 1.875rem;
+}
+
+.nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav__link {
+  color: #efefef;
+  display: inline-block;
+  margin-right: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+}

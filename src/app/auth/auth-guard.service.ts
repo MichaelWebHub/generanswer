@@ -1,25 +1,22 @@
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {CheckTokenPending} from '../_store/actions/auth.actions';
+import {Select} from 'ngrx-actions/dist';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router) {
+  @Select('auth.authenticated')
+  authenticated$: Observable<boolean>;
+
+  constructor(private _store: Store<any>) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    // this.store.dispatch(new CheckTokenPending({token: localStorage.getItem('token')}));
-    //
-    // return this.store.select('auth').pipe(
-    //   skip(1),
-    //   take(1),
-    //   map((r: any) => {
-    //     console.log(r);
-    //     return r.authenticated;
-    //   })
-    // );
+    this._store.dispatch(new CheckTokenPending({token: localStorage.getItem('token')}));
 
-    return true;
+    return this.authenticated$;
   }
 }

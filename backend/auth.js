@@ -1,12 +1,12 @@
 const db = require('../database/connection');
 const Users = require('../database/users.schema');
 const Credentials = require('../database/credentials.schema');
+const MESSAGE = require('./_common');
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
-
 
 const logIn = (req, res) => {
   return new Promise((resolve, reject) => {
@@ -125,7 +125,7 @@ const signUp = (req, res) => {
         resolve({
           user: {},
           status: false,
-          message: 'Не удалось подключиться к базе данных'
+          message: MESSAGE.error
         });
       });
   });
@@ -196,7 +196,6 @@ checkToken = (req, res) => {
     }
   )
 };
-
 
 module.exports = {
   signUp, logIn, verifyToken, checkToken

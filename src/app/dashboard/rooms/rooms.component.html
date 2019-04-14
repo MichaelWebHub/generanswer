@@ -1,0 +1,18 @@
+<div class="rooms">
+
+  <div class="room" *ngFor="let room of (rooms$ | async)">
+    <a class="room__inner" [routerLink]="room._id">
+      <h3 class="room__title"> {{room.name}} </h3>
+    </a>
+  </div>
+
+  <div class="room room-form">
+    <div class="room__inner">
+      <form class="room-create__form" #createRoomForm="ngForm" (submit)="createRoom(createRoomForm)">
+        <input class="room-create__input hidden" type="text" name="userId" [ngModel]="(user$ | async)._id">
+        <input class="room-create__input" type="text" name="name" ngModel placeholder="New room">
+        <button class="room-create__submit"> Save</button>
+      </form>
+    </div>
+  </div>
+</div>

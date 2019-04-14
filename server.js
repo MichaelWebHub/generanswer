@@ -3,6 +3,7 @@ const express = require('express');
 const jsonParser = require('body-parser').json();
 
 const {signUp, logIn, verifyToken, checkToken} = require('./backend/auth');
+const {getRooms, createRoom} = require('./backend/rooms');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -39,6 +40,19 @@ app.post('/signup', jsonParser, (req, res) => {
 
 /************************** Rooms **************************/
 
+/** Get all rooms */
+app.get('/getRooms/:userId', (req, res) => {
+  getRooms(req, res).then(r => {
+    res.json(r);
+  })
+});
+
+/** Create new room */
+app.post('/createRoom', jsonParser, (req, res) => {
+  createRoom(req, res).then(r => {
+    res.json(r);
+  })
+});
 
 /************************** Server **************************/
 /** Render pages */
