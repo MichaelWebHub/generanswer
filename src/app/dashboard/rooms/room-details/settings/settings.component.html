@@ -1,0 +1,120 @@
+<div class="config__global-wrapper">
+  <div class="config__container">
+    <div class="back-button">
+      <i class="fal fa-arrow-left"></i>
+      <p class="back-button__label"> Back </p>
+    </div>
+
+
+    <form class="config-form" #configForm="ngForm" (submit)="onAddCheckBoxSubmit(configForm)">
+
+      <div class="config-form__row">
+        <p class="config-label"> Label: </p>
+        <input type="text" class="config-input" name="sLabel" ngModel required autocomplete="off">
+      </div>
+
+      <div class="config-form__row">
+        <p class="config-label"> Text: </p>
+        <textarea type="text" class="config-textarea" name="sText" ngModel required autocomplete="off"></textarea>
+      </div>
+
+      <div class="config-form_buttons">
+        <button class="config-form__button" [disabled]="!configForm.valid"> Create</button>
+        <!--              <app-preloader *ngIf="saveOptionPreloader"></app-preloader>-->
+      </div>
+
+    </form>
+
+    <form class="config-form" #configEditForm="ngForm" (submit)="onEditCheckBoxSubmit(configEditForm)"
+          *ngIf="aOptions.length > 0">
+
+      <div class="form-group" *ngFor="let option of aOptions; let i = index" ngModelGroup="data-{{i}}">
+
+        <input type="text" name="_id" [ngModel]="option._id" class="hidden">
+
+        <div class="config-form__row">
+          <p class="config-label"> Label: </p>
+          <input type="text" class="config-input" name="sLabel" [ngModel]="option.sLabel" autocomplete="off">
+        </div>
+
+        <div class="config-form__row">
+          <p class="config-label"> Text: </p>
+          <textarea type="text" class="config-textarea" name="sText" [ngModel]="option.sText"
+                    autocomplete="off"></textarea>
+        </div>
+
+        <div class="config-form__row">
+          <p class="delete-checkbox"><span class="delete-checkbox__label" (click)="onDeleteCheckboxClick(option)"> Delete </span>
+          </p>
+        </div>
+      </div>
+
+      <div class="config-form_buttons">
+        <button class="config-form__button"> Save</button>
+        <!--              <app-preloader *ngIf="updateOptionsPreloader"></app-preloader>-->
+      </div>
+
+    </form>
+  </div>
+
+  <div class="config__container half config__container-right">
+    <form class="config-form" #globalConfigForm="ngForm" (submit)="onEditGlobalConfig(globalConfigForm)">
+
+      <div class="config-form__row">
+        <p class="config-label"> Greetings: </p>
+        <input type="text" class="config-input" name="sTextGreetings" [ngModel]="oConfig.sTextGreetings"
+               autocomplete="off">
+      </div>
+
+      <div class="config-form__row">
+        <p class="config-label"> Show start text: </p>
+        <label class="custom__checkbox">
+          <input type="checkbox" class="config-checkbox hidden" name="bShowStartText" [ngModel]="oConfig.bShowStartText"
+                 autocomplete="off">
+          <span class="config-checkbox__custom"> <i class="fal fa-check"></i></span></label>
+      </div>
+
+      <div class="config-form__row config-form__row--align-top" ngModelGroup="aTextStart">
+        <p class="config-label"> Start phrase: </p>
+        <div class="input__group">
+          <input type="text" class="config-input start-text__input"
+                 [name]="'sTextStart-' + i"
+                 [ngModel]="input" autocomplete="off"
+                 *ngFor="let input of oConfig.aTextStart; let i = index"
+                 [placeholder]="'If ' + (i + 1) + ' option(s) checked...'">
+          <div class="add-input__button" (click)="addInput(1)"><i class="fal fa-plus"></i></div>
+        </div>
+      </div>
+
+      <div class="config-form__row">
+        <p class="config-label"> Enumerable list: </p>
+        <label class="custom__checkbox">
+          <input type="checkbox" class="config-checkbox hidden" name="bIsEnumerable" [ngModel]="oConfig.bIsEnumerable"
+                 autocomplete="off">
+          <span class="config-checkbox__custom"> <i class="fal fa-check"></i></span></label>
+      </div>
+
+      <div class="config-form__row">
+        <p class="config-label"> Show end text: </p>
+        <label class="custom__checkbox">
+          <input type="checkbox" class="config-checkbox hidden" name="bShowEndText" [ngModel]="oConfig.bShowEndText"
+                 autocomplete="off">
+          <span class="config-checkbox__custom"> <i class="fal fa-check"></i></span></label>
+      </div>
+
+      <div class="config-form__row config-form__row--align-top">
+        <p class="config-label"> End phrase: </p>
+        <textarea type="text" class="config-textarea" name="sTextEnd" [ngModel]="oConfig.sTextEnd"
+                  autocomplete="off"></textarea>
+      </div>
+
+      <div class="config-form_buttons">
+        <button class="config-form__button"> Save</button>
+        <!--        <app-preloader *ngIf="updateGlobalConfigPreloader"></app-preloader>-->
+      </div>
+
+    </form>
+  </div>
+
+
+</div>

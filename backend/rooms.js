@@ -20,7 +20,7 @@ const getRooms = (req, res) => {
             });
           })
       })
-      .catch((error) => {
+      .catch(() => {
         resolve({
           status: false,
           message: MESSAGE.error
@@ -43,15 +43,15 @@ const createRoom = (req, res) => {
               })
                 .catch(e => console.log(e))
             }
-          ).catch(err => {
+          ).catch((error) => {
           resolve({
             status: false,
-            message: MESSAGE.error
+            message: error.message
           });
         });
 
       })
-      .catch(err => {
+      .catch(() => {
         resolve({
           status: false,
           message: MESSAGE.error

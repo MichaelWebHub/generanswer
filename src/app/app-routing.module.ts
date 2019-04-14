@@ -10,17 +10,17 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'rooms'
-      },
-      {
         path: 'rooms',
         component: RoomsComponent
       },
       {
         path: 'rooms/:roomId',
         component: RoomDetailsComponent
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'rooms'
       }
     ]
   }

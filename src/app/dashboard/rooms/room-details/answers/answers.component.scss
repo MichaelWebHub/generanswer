@@ -1,0 +1,54 @@
+.options {
+  height: 100%;
+  background: #333;
+}
+
+.checkbox-item {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox-item:first-of-type {
+  margin-top: 0;
+}
+
+.checkbox {
+  width: 1rem;
+  height: 1rem;
+  min-width: 1rem;
+  min-height: 1rem;
+  border-radius: 0.3125rem;
+  border: 1px solid #efefef;
+  background: #efefef;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #131313;
+}
+
+.checkbox-label {
+  margin-left: 0.6125rem;
+  font-size: 1.125rem;
+  font-weight: 300;
+  color: #efefef;
+}
+
+.checkbox-label.checked {
+  color: #9CCC65;
+}
+
+.delete-area{
+  width: 100%;
+  border-top: 1px dashed #FF5722;
+}
+
+.delete-area__help {
+  margin-top: 0.3125rem;
+  font-size: 0.875rem;
+  color: #FF5722;
+  font-weight: 300;
+  letter-spacing: 0.4px;
+}

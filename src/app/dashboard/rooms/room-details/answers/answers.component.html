@@ -1,0 +1,14 @@
+<div class="options">
+  <div class="checkboxes">
+    <div class="checkbox-item" *ngFor="let item of []" (click)="onCheckboxClick(item)">
+      <div class="checkbox">
+        <i class="fal fa-check" *ngIf="item"></i>
+      </div>
+      <div class="checkbox-label" [class.checked]="false"> {{item}}</div>
+    </div>
+  </div>
+
+  <div class="delete-area" (click)="onRefreshClick()">
+    <p class="delete-area__help"> Click below this line to refresh text area </p>
+  </div>
+</div>

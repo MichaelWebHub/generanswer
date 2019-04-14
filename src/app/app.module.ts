@@ -21,6 +21,9 @@ import {RoomsComponent} from './dashboard/rooms/rooms.component';
 import {RoomDetailsComponent} from './dashboard/rooms/room-details/room-details.component';
 import {RoomsEffects} from './_store/effects/rooms.effects';
 import {RoomsReducer} from './_store/reducers/rooms.reducer';
+import { AnswersComponent } from './dashboard/rooms/room-details/answers/answers.component';
+import { ResultComponent } from './dashboard/rooms/room-details/result/result.component';
+import { SettingsComponent } from './dashboard/rooms/room-details/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import {RoomsReducer} from './_store/reducers/rooms.reducer';
     DashboardComponent,
     HeaderComponent,
     RoomsComponent,
-    RoomDetailsComponent
+    RoomDetailsComponent,
+    AnswersComponent,
+    ResultComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),

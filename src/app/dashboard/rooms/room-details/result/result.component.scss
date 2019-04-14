@@ -1,0 +1,16 @@
+.text-area {
+  height: 100%;
+  overflow: auto;
+}
+
+.text-row {
+  margin-top: 0.5rem;
+  display: flex;
+  color: #323232;
+  font-size: 1.125rem;
+}
+
+.text__text {
+  display: inline-block;
+  margin-left: 0.3125rem;
+}
