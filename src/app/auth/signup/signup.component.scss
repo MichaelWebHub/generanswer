@@ -1,0 +1,77 @@
+@import "../../_utils/index";
+
+.form {
+  max-width: 500px;
+  padding: 3.125rem;
+  background: $primary300;
+  border-radius: $borderRadius;
+}
+
+.form__row {
+  margin-bottom: 0.625rem;
+}
+
+.form__input--text {
+  @include textInput();
+}
+
+.form__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form__button {
+  @include submitButton();
+}
+
+.form__footer {
+  margin-top: 1.625rem;
+}
+
+.form__footer-link {
+  color: $lightGrey;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.form__radio {
+  margin-bottom: 0.3125rem;
+}
+
+.form__input--radio {
+  display: none;
+}
+
+.form__radio-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.form__input--radio:checked ~ .custom-radio .custom-radio--check {
+  opacity: 1;
+}
+
+.custom-radio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: #fff;
+  transition: 0.15s;
+}
+
+.custom-radio--check {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background: $lightGrey;
+  opacity: 0;
+}
+
+.custom-radio__label {
+  margin-left: 0.5rem;
+}

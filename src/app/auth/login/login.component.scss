@@ -1,0 +1,36 @@
+@import "../../_utils/index";
+
+.form {
+  max-width: 500px;
+  padding: 3.125rem;
+  background: $primary300;
+  border-radius: $borderRadius;
+}
+
+.form__row {
+  margin-bottom: 0.625rem;
+}
+
+.form__input--text {
+  @include textInput();
+}
+
+.form__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form__button {
+  @include submitButton();
+}
+
+.form__footer {
+  margin-top: 1.625rem;
+}
+
+.form__footer-link {
+  color: $lightGrey;
+  font-weight: 600;
+  cursor: pointer;
+}

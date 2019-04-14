@@ -1,0 +1,30 @@
+<div class="container">
+  <form class="form" #form="ngForm" (submit)="onSignUp(form)">
+
+    <div class="form__row">
+      <input type="text" class="form__input--text" placeholder="Email" name="email" ngModel>
+    </div>
+
+    <div class="form__row">
+      <input type="text" class="form__input--text" placeholder="Password" name="password" ngModel>
+    </div>
+
+    <!--<div class="form__row">-->
+      <!--<input type="text" class="form__input&#45;&#45;text" placeholder="Name" name="name" ngModel>-->
+    <!--</div>-->
+
+    <!--<div class="form__row">-->
+      <!--<input type="text" class="form__input&#45;&#45;text" placeholder="Surname" name="surname" ngModel>-->
+    <!--</div>-->
+
+    <div class="form__buttons">
+      <div class="form__message">{{message}}</div>
+      <button class="form__button">Sign up</button>
+    </div>
+
+    <footer class="form__footer">
+      I already have an account. <span class="form__footer-link" (click)="login()">Login</span>
+    </footer>
+
+  </form>
+</div>

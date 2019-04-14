@@ -1,0 +1,23 @@
+<div class="container">
+  <form class="form" #form="ngForm" (submit)="onLogin(form)">
+
+    <div class="form__row">
+      <input type="text" class="form__input--text" placeholder="Email" name="email" [ngModel]="'a@yandex.ru'" required="">
+    </div>
+
+    <div class="form__row">
+      <input type="text" class="form__input--text" placeholder="Password" name="password" [ngModel]="'a'" required="">
+    </div>
+
+    <div class="form__buttons">
+      <div class="form__message">{{message}}</div>
+      <button class="form__button" [disabled]="form.invalid">Login</button>
+    </div>
+
+
+    <footer class="form__footer">
+      I don't have an account. <span class="form__footer-link" (click)="signUp()">Sign up</span>
+    </footer>
+
+  </form>
+</div>
