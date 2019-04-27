@@ -25,7 +25,7 @@ export class GetSettingsError implements Action {
   }
 }
 
-/** Settings POST actions */
+/** Create option actions */
 
 export class CreateOptionPending implements Action {
   public readonly type = '[Settings] Create option pending';
@@ -66,6 +66,29 @@ export class DeleteOptionSuccess implements Action {
 
 export class DeleteOptionError implements Action {
   public readonly type = '[Settings] Delete option error';
+
+  constructor(public payload: string) {
+  }
+}
+
+/** Edit options actions */
+
+export class EditOptionPending implements Action {
+  public readonly type = '[Settings] Edit option pending';
+
+  constructor(public payload: {roomId: string, options: IOption[]}) {
+  }
+}
+
+export class EditOptionSuccess implements Action {
+  public readonly type = '[Settings] Edit option success';
+
+  constructor(public payload: IOption[]) {
+  }
+}
+
+export class EditOptionError implements Action {
+  public readonly type = '[Settings] Edit option error';
 
   constructor(public payload: string) {
   }

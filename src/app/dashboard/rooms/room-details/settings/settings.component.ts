@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {Store} from '@ngrx/store';
-import {CreateOptionPending, DeleteOptionPending, GetSettingsPending} from '../../../../_store/actions/settings.actions';
+import {CreateOptionPending, DeleteOptionPending, EditOptionPending, GetSettingsPending} from '../../../../_store/actions/settings.actions';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Select} from 'ngrx-actions/dist';
@@ -52,10 +52,17 @@ export class SettingsComponent implements OnInit {
 
   onEditCheckBoxSubmit(form: any): void {
     // this.updateOptionsPreloader = true;
-    // for (const key in form.value) {
-    //   const data = form.value[key];
-    //   data.roomID = this.roomID;
-    // }
+
+    let data = {
+      options: [],
+      roomId: this._route.snapshot.params.roomId
+    };
+
+    for (const key in form.value) {
+      data.options.push(form.value[key]);
+    }
+
+    this._store.dispatch(new EditOptionPending(data));
   }
 
   onDeleteCheckboxClick(option: IOption): void {

@@ -8,7 +8,7 @@ import {GetRoomsError} from '../actions/rooms.actions';
 import {
   CreateOptionError,
   CreateOptionPending,
-  CreateOptionSuccess, DeleteOptionError, DeleteOptionPending, DeleteOptionSuccess,
+  CreateOptionSuccess, DeleteOptionError, DeleteOptionPending, DeleteOptionSuccess, EditOptionError, EditOptionPending, EditOptionSuccess,
   GetSettingsPending,
   GetSettingsSuccess
 } from '../actions/settings.actions';
@@ -71,6 +71,26 @@ export class SettingsEffects {
               return new DeleteOptionSuccess(data.optionId);
             } else {
               return new DeleteOptionError(response.message);
+            }
+          })
+        );
+    })
+  );
+
+  /** ---------------------------------------------------- */
+
+  @Effect()
+  editOptions = this.actions$.pipe(
+    ofAction(EditOptionPending),
+    map((action: EditOptionPending) => action.payload),
+    switchMap((data: {roomId: string; options: IOption[]}) => {
+      return this.http.post(`/editOptions/`, data)
+        .pipe(
+          map((response: { status: boolean; message?: string }) => {
+            if (response.status) {
+              return new EditOptionSuccess(data.options);
+            } else {
+              return new EditOptionError(response.message);
             }
           })
         );

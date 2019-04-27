@@ -28,6 +28,35 @@ const getSettings = (req, res) => {
   });
 };
 
+const getOptions = (req, res) => {
+  return new Promise((resolve, reject) => {
+    db()
+      .then(() => {
+
+        RoomSettings.findOne({roomId: req.params.roomId})
+          .then((result) => {
+            resolve({
+              status: true,
+              options: result.get('options')
+            })
+          })
+          .catch(e => {
+            resolve({
+              status: false,
+              message: e.message
+            });
+          })
+
+      })
+      .catch(() => {
+        resolve({
+          status: false,
+          message: MESSAGE.error
+        });
+      })
+  });
+};
+
 const createOption = (req, res) => {
   return new Promise((resolve, reject) => {
     db()
@@ -57,34 +86,40 @@ const createOption = (req, res) => {
   });
 };
 
-const getOptions = (req, res) => {
+const editOptions = (req, res) => {
   return new Promise((resolve, reject) => {
     db()
       .then(() => {
 
-        RoomSettings.findOne({roomId: req.params.roomId})
+        RoomSettings.findOne({roomId: req.body.roomId})
           .then((result) => {
-            resolve({
-              status: true,
-              options: result.get('options')
+            req.body.options.forEach(opt => {
+              const option = result.options.id(opt._id);
+              option.set({'label': opt.label, 'text': opt.text});
+            });
+
+            result.save().then(() => {
+              resolve({
+                status: true
+              })
             })
+              .catch(e => {
+                resolve({
+                  status: false,
+                  message: e.message
+                });
+              })
+
           })
-          .catch(e => {
+          .catch(() => {
             resolve({
               status: false,
-              message: e.message
+              message: MESSAGE.error
             });
           })
-
-      })
-      .catch(() => {
-        resolve({
-          status: false,
-          message: MESSAGE.error
-        });
-      })
+      });
   });
-};
+}
 
 const deleteOption = (req, res) => {
   return new Promise((resolve, reject) => {
@@ -118,5 +153,5 @@ const deleteOption = (req, res) => {
 };
 
 module.exports = {
-  getSettings, createOption, getOptions, deleteOption
+  getSettings, createOption, getOptions, deleteOption, editOptions
 };
