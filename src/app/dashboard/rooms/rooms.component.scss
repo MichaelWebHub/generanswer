@@ -57,6 +57,11 @@
   font-weight: 500;
 }
 
+.room-create__submit[disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
+
 .room-create__form {
   width: 80%;
   height: 100%;
