@@ -6,6 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Select} from 'ngrx-actions/dist';
 import {IConfig, IOption} from '../../../../_store/interfaces/settings.interface';
+import {DeleteRoomPending} from '../../../../_store/actions/rooms.actions';
 
 @Component({
   selector: 'app-settings',
@@ -67,5 +68,9 @@ export class SettingsComponent implements OnInit {
 
   onDeleteCheckboxClick(option: IOption): void {
     this._store.dispatch(new DeleteOptionPending({roomId: this._route.snapshot.params.roomId, optionId: option._id}));
+  }
+
+  deleteRoom(): void {
+    this._store.dispatch(new DeleteRoomPending(this._route.snapshot.params.roomId));
   }
 }

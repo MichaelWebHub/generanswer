@@ -1,5 +1,5 @@
 import {Action, Store} from 'ngrx-actions/dist';
-import {CreateRoomError, CreateRoomSuccess, GetRoomsError, GetRoomsSuccess} from '../actions/rooms.actions';
+import {CreateRoomSuccess, DeleteRoomSuccess, GetRoomsSuccess} from '../actions/rooms.actions';
 import {IRoomsStore} from '../interfaces/rooms.interface';
 
 @Store({
@@ -13,10 +13,6 @@ export class RoomsReducer {
     state.collection.push(action.payload);
   }
 
-  @Action(CreateRoomError)
-  createRoomError(state: IRoomsStore, action: CreateRoomError) {
-  }
-
   /** ---------------------------------------------------- */
 
   @Action(GetRoomsSuccess)
@@ -24,8 +20,11 @@ export class RoomsReducer {
     state.collection = action.payload;
   }
 
-  @Action(GetRoomsError)
-  getRoomsError(state: IRoomsStore, action: GetRoomsError) {
+  @Action(DeleteRoomSuccess)
+  deleteRoomError(state: IRoomsStore, action: DeleteRoomSuccess) {
+    const index = state.collection.findIndex(it => it._id === action.payload);
+    state.collection.splice(index, 1);
   }
+
 }
 

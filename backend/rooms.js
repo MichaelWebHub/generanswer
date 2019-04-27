@@ -83,6 +83,37 @@ const createRoom = (req, res) => {
   })
 };
 
+const deleteRoom = (req, res) => {
+  return new Promise((resolve, reject) => {
+    db()
+      .then(() => {
+
+        Rooms.findOneAndRemove({_id: req.params.roomId})
+          .then(() => {
+
+            RoomSettings.findOneAndRemove({roomId: req.params.roomId})
+              .then(() => {
+                resolve({
+                  status: true
+                });
+              })
+          })
+          .catch((error) => {
+            resolve({
+              status: false,
+              message: error.message
+            });
+          })
+      })
+      .catch(() => {
+        resolve({
+          status: false,
+          message: MESSAGE.error
+        });
+      })
+  });
+};
+
 module.exports = {
-  createRoom, getRooms
+  createRoom, getRooms, deleteRoom
 };

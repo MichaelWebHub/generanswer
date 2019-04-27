@@ -8,11 +8,15 @@ import {
   CreateRoomError,
   CreateRoomPending,
   CreateRoomSuccess,
+  DeleteRoomError,
+  DeleteRoomPending,
+  DeleteRoomSuccess,
   GetRoomsError,
   GetRoomsPending,
   GetRoomsSuccess
 } from '../actions/rooms.actions';
 import {IRoom} from '../interfaces/rooms.interface';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class RoomsEffects {
@@ -58,8 +62,30 @@ export class RoomsEffects {
     })
   );
 
+  /** ---------------------------------------------------- */
+
+  @Effect()
+  deleteRoom = this.actions$.pipe(
+    ofAction(DeleteRoomPending),
+    map((action: DeleteRoomPending) => action.payload),
+    switchMap((roomId: string) => {
+      return this.http.get(`/deleteRoom/${roomId}`)
+        .pipe(
+          map((response: { status: boolean; message?: string }): any => {
+            if (response.status) {
+              this._router.navigate(['dashboard']);
+              return new DeleteRoomSuccess(roomId);
+            } else {
+              return new DeleteRoomError(response.message);
+            }
+          })
+        );
+    })
+  );
+
   constructor(private actions$: Actions,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private _router: Router) {
   }
 
 }

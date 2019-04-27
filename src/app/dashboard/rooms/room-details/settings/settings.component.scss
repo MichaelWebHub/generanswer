@@ -164,3 +164,18 @@
   border-color: #4587D3;
   color: #4587D3;
 }
+
+.delete-room {
+  margin-top: 1rem;
+  outline: 0;
+  border: 0;
+  padding: 0.3125rem 0.625rem;
+  background: #FF5722;
+  color: #efefef;
+  cursor: pointer;
+  border-radius: 0.3125rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.15s;
+}

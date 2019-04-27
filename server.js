@@ -3,7 +3,7 @@ const express = require('express');
 const jsonParser = require('body-parser').json();
 
 const {signUp, logIn, verifyToken, checkToken} = require('./backend/auth');
-const {getRooms, createRoom} = require('./backend/rooms');
+const {getRooms, createRoom, deleteRoom} = require('./backend/rooms');
 const {getSettings, createOption, getOptions, deleteOption, editOptions} = require('./backend/options');
 
 const PORT = process.env.PORT || 3000;
@@ -90,6 +90,13 @@ app.post('/editOptions', jsonParser, (req, res) => {
 /** Get all rooms */
 app.get('/getOptions/:roomId', (req, res) => {
   getOptions(req, res).then(r => {
+    res.json(r);
+  })
+});
+
+/** Delete room */
+app.get('/deleteRoom/:roomId', (req, res) => {
+  deleteRoom(req, res).then(r => {
     res.json(r);
   })
 });

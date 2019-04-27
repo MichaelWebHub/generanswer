@@ -44,3 +44,26 @@ export class GetRoomsError implements Action {
   constructor(public payload: string) {
   }
 }
+
+/** ---------------------------------------------------- */
+
+export class DeleteRoomPending implements Action {
+  public readonly type = '[Rooms] Delete room pending';
+
+  constructor(public payload: string) {
+  }
+}
+
+export class DeleteRoomSuccess implements Action {
+  public readonly type = '[Rooms] Delete room success';
+
+  constructor(public payload: string) {
+  }
+}
+
+export class DeleteRoomError implements Action {
+  public readonly type = '[Rooms] Delete room error';
+
+  constructor(public payload: string) {
+  }
+}
