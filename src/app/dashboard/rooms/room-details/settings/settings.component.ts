@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {Store} from '@ngrx/store';
-import {GetSettingsPending} from '../../../../_store/actions/settings.actions';
+import {CreateOptionPending, DeleteOptionPending, GetSettingsPending} from '../../../../_store/actions/settings.actions';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Select} from 'ngrx-actions/dist';
@@ -42,18 +42,12 @@ export class SettingsComponent implements OnInit {
 
   onAddCheckBoxSubmit(form: any): void {
     // this.saveOptionPreloader = true;
-    // const data = {
-    //   roomID: this.roomID,
-    //   data: form.value
-    // };
-    //
-    // this.dataService.post('/createOption', data).subscribe(
-    //   (result: any) => {
-    //     this.saveOptionPreloader = false;
-    //     this.aOptions = result.oRoom.aOptions;
-    //     this.transferService.setObserver('aOptions', result.oRoom.aOptions);
-    //   }
-    // );
+    const data = {
+      roomID: this._route.snapshot.params.roomId,
+      data: form.value
+    };
+
+    this._store.dispatch(new CreateOptionPending(data));
   }
 
   onEditCheckBoxSubmit(form: any): void {
@@ -62,5 +56,9 @@ export class SettingsComponent implements OnInit {
     //   const data = form.value[key];
     //   data.roomID = this.roomID;
     // }
+  }
+
+  onDeleteCheckboxClick(option: IOption): void {
+    this._store.dispatch(new DeleteOptionPending({roomId: this._route.snapshot.params.roomId, optionId: option._id}));
   }
 }

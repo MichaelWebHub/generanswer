@@ -1,5 +1,8 @@
+@import "../../../../_utils/index";
+
 .options {
   height: 100%;
+  padding: rem(0 16px);
 }
 
 .checkbox-item {
@@ -42,6 +45,7 @@
 .delete-area{
   width: 100%;
   border-top: 1px dashed #FF5722;
+  margin-top: rem(16px);
 }
 
 .delete-area__help {

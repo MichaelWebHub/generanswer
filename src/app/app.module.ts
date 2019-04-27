@@ -26,6 +26,8 @@ import {SettingsComponent} from './dashboard/rooms/room-details/settings/setting
 import {OptionsComponent} from './dashboard/rooms/room-details/options/options.component';
 import {SettingsEffects} from './_store/effects/settings.effects';
 import {SettingsReducer} from './_store/reducers/settings.reducer';
+import {OptionsReducer} from './_store/reducers/options.reducer';
+import {OptionsEffects} from './_store/effects/options.effects';
 
 @NgModule({
   declarations: [
@@ -45,12 +47,14 @@ import {SettingsReducer} from './_store/reducers/settings.reducer';
     NgrxActionsModule.forRoot({
       auth: AuthReducer,
       rooms: RoomsReducer,
-      settings: SettingsReducer
+      settings: SettingsReducer,
+      options: OptionsReducer
     }),
     EffectsModule.forRoot([
       AuthEffects,
       RoomsEffects,
-      SettingsEffects
+      SettingsEffects,
+      OptionsEffects
     ]),
     StoreDevtoolsModule.instrument(),
     HttpClientModule,

@@ -28,6 +28,95 @@ const getSettings = (req, res) => {
   });
 };
 
+const createOption = (req, res) => {
+  return new Promise((resolve, reject) => {
+    db()
+      .then(() => {
+
+        RoomSettings.findOneAndUpdate({roomId: req.body.roomID}, {$push: {'options': req.body.data}}, {new: true})
+          .then((result) => {
+            resolve({
+              status: true,
+              options: result.get('options')
+            })
+          })
+          .catch(e => {
+            resolve({
+              status: false,
+              message: e.message
+            });
+          })
+
+      })
+      .catch(() => {
+        resolve({
+          status: false,
+          message: MESSAGE.error
+        });
+      })
+  });
+};
+
+const getOptions = (req, res) => {
+  return new Promise((resolve, reject) => {
+    db()
+      .then(() => {
+
+        RoomSettings.findOne({roomId: req.params.roomId})
+          .then((result) => {
+            resolve({
+              status: true,
+              options: result.get('options')
+            })
+          })
+          .catch(e => {
+            resolve({
+              status: false,
+              message: e.message
+            });
+          })
+
+      })
+      .catch(() => {
+        resolve({
+          status: false,
+          message: MESSAGE.error
+        });
+      })
+  });
+};
+
+const deleteOption = (req, res) => {
+  return new Promise((resolve, reject) => {
+    db()
+      .then(() => {
+        RoomSettings.findOne({roomId: req.params.roomId})
+          .then((result) => {
+            result.options.id(req.params.optionId).remove();
+            result.save()
+              .then(() => {
+                resolve({
+                  status: true
+                })
+              })
+          })
+          .catch(e => {
+            resolve({
+              status: false,
+              message: e.message
+            });
+          })
+
+      })
+      .catch(() => {
+        resolve({
+          status: false,
+          message: MESSAGE.error
+        });
+      })
+  });
+};
+
 module.exports = {
-  getSettings
+  getSettings, createOption, getOptions, deleteOption
 };

@@ -1,10 +1,10 @@
 <div class="options">
   <div class="checkboxes">
-    <div class="checkbox-item" *ngFor="let item of []" (click)="onCheckboxClick(item)">
+    <div class="checkbox-item" *ngFor="let item of (options$ | async)" (click)="onCheckboxClick(item)">
       <div class="checkbox">
-        <i class="fal fa-check" *ngIf="item"></i>
+        <i class="fal fa-check" *ngIf="item.isChecked"></i>
       </div>
-      <div class="checkbox-label" [class.checked]="false"> {{item}}</div>
+      <div class="checkbox-label" [class.checked]="item.isChecked"> {{item.label}}</div>
     </div>
   </div>
 

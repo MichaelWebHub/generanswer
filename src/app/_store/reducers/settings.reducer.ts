@@ -1,6 +1,5 @@
 import {Action, Store} from 'ngrx-actions/dist';
-import {IRoomsStore} from '../interfaces/rooms.interface';
-import {GetSettingsError, GetSettingsSuccess} from '../actions/settings.actions';
+import {CreateOptionSuccess, DeleteOptionSuccess, GetSettingsSuccess} from '../actions/settings.actions';
 import {ISettingsStore} from '../interfaces/settings.interface';
 
 @Store({
@@ -18,8 +17,15 @@ export class SettingsReducer {
     state.loaded = true;
   }
 
-  @Action(GetSettingsError)
-  createRoomError(state: IRoomsStore, action: GetSettingsError) {
+  @Action(CreateOptionSuccess)
+  createOptionSuccess(state: ISettingsStore, action: CreateOptionSuccess) {
+    state.options = action.payload;
+  }
+
+  @Action(DeleteOptionSuccess)
+  deleteOptionSuccess(state: ISettingsStore, action: DeleteOptionSuccess) {
+    const index = state.options.findIndex(it => it._id === action.payload);
+    state.options.splice(index, 1);
   }
 }
 

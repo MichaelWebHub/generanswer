@@ -4,7 +4,7 @@ const jsonParser = require('body-parser').json();
 
 const {signUp, logIn, verifyToken, checkToken} = require('./backend/auth');
 const {getRooms, createRoom} = require('./backend/rooms');
-const {getSettings} = require('./backend/options');
+const {getSettings, createOption, getOptions, deleteOption} = require('./backend/options');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -60,6 +60,29 @@ app.post('/createRoom', jsonParser, (req, res) => {
 /** Get rooms' settings */
 app.get('/getSettings/:roomId', (req, res) => {
   getSettings(req, res).then(r => {
+    res.json(r);
+  })
+});
+
+/** Set rooms' settings */
+app.post('/createOption/', jsonParser, (req, res) => {
+  createOption(req, res).then(r => {
+    res.json(r);
+  })
+});
+
+/** Delete option */
+app.get('/deleteOption/:roomId/:optionId', (req, res) => {
+  deleteOption(req, res).then(r => {
+    res.json(r);
+  })
+});
+
+/************************** Options **************************/
+
+/** Get all rooms */
+app.get('/getOptions/:roomId', (req, res) => {
+  getOptions(req, res).then(r => {
     res.json(r);
   })
 });

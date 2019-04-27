@@ -41,12 +41,7 @@ const createRoom = (req, res) => {
 
               const options = new RoomSettings({
                 roomId: result._id,
-                options: {
-                  label: '',
-                  text: '',
-                  isChecked: false,
-                  isNewLine: true
-                },
+                options: [],
                 config: {
                   connectGreetingsToTime: false,
                   textGreetings: '',

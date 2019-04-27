@@ -5,12 +5,16 @@ export interface ISettingsStore {
   roomId: string;
 }
 
+export interface IOptionsStore {
+  collection: IOption[];
+}
+
 export interface IOption {
-  _id: string;
+  _id?: string;
   label: string;
   text: string;
-  isChecked: boolean;
-  isNewLine: boolean;
+  isChecked?: boolean;
+  isNewLine?: boolean;
 }
 
 export interface IConfig {

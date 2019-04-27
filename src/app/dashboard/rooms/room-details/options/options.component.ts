@@ -1,4 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Store} from '@ngrx/store';
+import {GetOptionsPending} from '../../../../_store/actions/options.actions';
+import {Select} from 'ngrx-actions/dist';
+import {Observable} from 'rxjs';
+import {IOption} from '../../../../_store/interfaces/settings.interface';
 
 @Component({
   selector: 'app-options',
@@ -7,15 +13,20 @@ import {Component, OnInit} from '@angular/core';
 })
 export class OptionsComponent implements OnInit {
 
-  constructor() {
+  @Select('options.collection')
+  options$: Observable<IOption[]>;
+
+  constructor(private _route: ActivatedRoute,
+              private _store: Store<any>) {
   }
 
   ngOnInit() {
+    this._store.dispatch(new GetOptionsPending(this._route.snapshot.params.roomId));
   }
 
   onCheckboxClick(item: any): void {
-    // item.bIsChecked = !item.bIsChecked;
-    //
+    item.bIsChecked = !item.bIsChecked;
+
     // const indexes = this.textToPrint.map(el => {
     //   return el._id;
     // });

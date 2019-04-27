@@ -26,7 +26,7 @@ const ConfigSchema = new Schema({
 
 const RoomSettingsSchema = new Schema({
   roomId: String,
-  options: SettingsSchema,
+  options: [SettingsSchema],
   config: ConfigSchema
 });
 
