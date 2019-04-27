@@ -24,3 +24,15 @@ export class GetOptionsError implements Action {
   }
 }
 
+/** Check options */
+export class CheckOption implements Action {
+  public readonly type = '[Options] Check option';
+
+  constructor(public payload: IOption) {
+  }
+}
+
+/** Refresh options */
+export class RefreshOptions implements Action {
+  public readonly type = '[Options] Refresh option';
+}

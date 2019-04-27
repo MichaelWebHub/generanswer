@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Store} from '@ngrx/store';
-import {GetOptionsPending} from '../../../../_store/actions/options.actions';
+import {CheckOption, GetOptionsPending, RefreshOptions} from '../../../../_store/actions/options.actions';
 import {Select} from 'ngrx-actions/dist';
 import {Observable} from 'rxjs';
 import {IOption} from '../../../../_store/interfaces/settings.interface';
@@ -25,29 +25,13 @@ export class OptionsComponent implements OnInit {
   }
 
   onCheckboxClick(item: any): void {
-    item.bIsChecked = !item.bIsChecked;
+    item.isChecked = !item.isChecked;
 
-    // const indexes = this.textToPrint.map(el => {
-    //   return el._id;
-    // });
-    //
-    // const index = indexes.indexOf(item._id);
-    //
-    // if (index < 0) {
-    //   this.textToPrint.push(item);
-    // } else {
-    //   this.textToPrint.splice(index, 1);
-    // }
-    //
-    // this.getTextStart(this.textToPrint.length);
+    this._store.dispatch(new CheckOption(item));
   }
 
   onRefreshClick(): void {
-    // this.aOptions.forEach(option => {
-    //   option.bIsChecked = false;
-    // });
-    // this.textToPrint = [];
-    // this.getTextStart(this.textToPrint.length);
+    this._store.dispatch(new RefreshOptions());
   }
 
 }

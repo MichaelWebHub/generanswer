@@ -7,6 +7,7 @@ export interface ISettingsStore {
 
 export interface IOptionsStore {
   collection: IOption[];
+  selection: IOption[];
 }
 
 export interface IOption {

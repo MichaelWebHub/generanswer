@@ -1,6 +1,9 @@
+@import "../../../../_utils/index";
+
 .text-area {
   height: 100%;
   overflow: auto;
+  padding: rem(16px);
 }
 
 .text-row {

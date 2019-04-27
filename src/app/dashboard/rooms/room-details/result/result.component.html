@@ -1,26 +1,23 @@
-<div class="text-area"  #textarea (click)="copyToClipboard(textarea)" (mouseup)="makeBgTransition(textarea)">
+<div class="text-area" #textarea (click)="copyToClipboard(textarea)" (mouseup)="makeBgTransition(textarea)">
 
-<!--  <div class="text-row">-->
-<!--    <span class="text__text">{{oConfig.sTextGreetings + '\n'}}</span>-->
-<!--  </div>-->
-
-
-
-<!--  <div class="text-row" *ngIf="oConfig.bShowStartText">-->
-<!--    <span class="text__text">{{textStart + '\n'}}</span>-->
-<!--  </div>-->
+  <!--  <div class="text-row">-->
+  <!--    <span class="text__text">{{oConfig.sTextGreetings + '\n'}}</span>-->
+  <!--  </div>-->
 
 
-
-<!--  <div class="text-row" *ngFor="let text of textToPrint; let i = index">-->
-<!--    <span class="text__index" *ngIf="oConfig.bIsEnumerable">{{i + 1}}.</span>-->
-<!--    <span class="text__text">{{text.sText + '\n'}}</span>-->
-<!--  </div>-->
+  <!--  <div class="text-row" *ngIf="oConfig.bShowStartText">-->
+  <!--    <span class="text__text">{{textStart + '\n'}}</span>-->
+  <!--  </div>-->
 
 
+  <div class="text-row" *ngFor="let option of (options$ | async); let i = index">
+    <span class="text__index" *ngIf="true">{{i + 1}}.</span>
+    <span class="text__text">{{option.text + '\n'}}</span>
+  </div>
 
-<!--  <div class="text-row" *ngIf="oConfig.bShowEndText">-->
-<!--    <pre class="text__text">{{oConfig.sTextEnd + '\n'}}</pre>-->
-<!--  </div>-->
+
+  <!--  <div class="text-row" *ngIf="oConfig.bShowEndText">-->
+  <!--    <pre class="text__text">{{oConfig.sTextEnd + '\n'}}</pre>-->
+  <!--  </div>-->
 
 </div>
