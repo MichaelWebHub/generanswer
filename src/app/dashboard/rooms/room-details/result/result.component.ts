@@ -75,7 +75,7 @@ export class ResultComponent implements OnInit, OnDestroy {
   }
 
   makeBgTransition(element: HTMLElement): void {
-    element.style.background = '#39a37980';
+    element.style.background = '#5ac59b';
     setTimeout(function () {
       element.style.background = '#efefef';
     }, 300);

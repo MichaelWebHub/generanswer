@@ -1,4 +1,4 @@
-<div class="rooms">
+<div class="rooms" *ngIf="(user$ | async)">
 
   <div class="room" *ngFor="let room of (rooms$ | async)">
     <a class="room__inner" [routerLink]="room._id">

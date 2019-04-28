@@ -2,11 +2,11 @@
   <form class="form" #form="ngForm" (submit)="onLogin(form)">
 
     <div class="form__row">
-      <input type="text" class="form__input--text" placeholder="Email" name="email" [ngModel]="'a@yandex.ru'" required="">
+      <input type="text" class="form__input--text" placeholder="Email" name="email" ngModel required>
     </div>
 
     <div class="form__row">
-      <input type="text" class="form__input--text" placeholder="Password" name="password" [ngModel]="'a'" required="">
+      <input type="text" class="form__input--text" placeholder="Password" name="password" ngModel required>
     </div>
 
     <div class="form__buttons">

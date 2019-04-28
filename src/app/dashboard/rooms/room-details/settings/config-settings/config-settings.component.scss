@@ -1,3 +1,5 @@
+@import "../../../../../_utils/index";
+
 .hidden {
   display: none;
 }
@@ -6,21 +8,7 @@
   width: 100%;
   height: 100%;
   display: flex;
-  background: #333;
-}
-
-.back-button {
-  display: flex;
-  align-items: center;
-  color: #efefef;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 300;
-}
-
-.back-button__label {
-  margin-left: 0.3125rem;
-  font-weight: 300;
+  background: $darkGrey;
 }
 
 .config__container {
@@ -46,17 +34,13 @@
   font-weight: 300;
   letter-spacing: 0.4px;
   width: 10rem;
-  color: #efefef;
+  color: $textColor;
   padding-right: 0.625rem;
 }
 
 .config-input {
+  @include textInput();
   width: calc(100% - 10rem);
-  height: 1.5rem;
-  padding: 0.3125rem 0.625rem;
-  border-radius: 0.3125rem;
-  border: 0;
-  color: #323232;
 }
 
 .input__group {
@@ -70,36 +54,18 @@
 
 
 .config-textarea {
+  @include textInput();
   width: calc(100% - 10rem);
-  height: 3rem;
-  padding: 0.3125rem 0.625rem;
-  border-radius: 0.3125rem;
-  resize: vertical;
-  border: 0;
-  color: #323232;
 }
 
 .config-form_buttons {
-  margin-top: 0.625rem;
+  margin-top: rem(16px);
   display: flex;
   align-items: center;
 }
 
 .config-form__button {
-  margin-right: 1rem;
-  margin-top: 0.625rem;
-  display: inline-block;
-  font-weight: 400;
-  padding: 0.5rem 1.5rem;
-  border: 1px solid #4587D3;
-  border-radius: 0.3125rem;
-  cursor: pointer;
-  background: #4587D3;
-  color: #efefef;
-}
-
-.config-form__button[disabled] {
-  opacity: 0.7;
+  @include button();
 }
 
 .form-group {
@@ -113,7 +79,7 @@
 
 .delete-checkbox__label {
   cursor: pointer;
-  color: #FF5722;
+  color: $pink;
   font-size: 0.75rem;
   font-weight: 300;
   letter-spacing: 0.4px;
@@ -124,16 +90,7 @@
 }
 
 .config-checkbox__custom {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 1.25rem;
-  height: 1.25rem;
-  color: #efefef;
-  border: 1px solid #efefef;
-  border-radius: 0.3125rem;
-  font-size: 0.875rem;
-  cursor: pointer;
+  @include checkbox();
 }
 
 .config-checkbox__custom i {
@@ -146,21 +103,6 @@
 }
 
 .add-input__button {
-  outline: 0;
-  border: 1px solid #efefef;
-  color: #efefef;
-  cursor: pointer;
-  width: 3rem;
-  height: 1.5rem;
-  border-radius: 0.3125rem;
-  background: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.15s;
+  @include button();
 }
 
-.add-input__button:hover {
-  border-color: #4587D3;
-  color: #4587D3;
-}

@@ -32,7 +32,9 @@ export class RoomsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.control$$))
       .subscribe(
         (user: IUser) => {
-          this._store.dispatch(new GetRoomsPending(user._id));
+          if (user) {
+            this._store.dispatch(new GetRoomsPending(user._id));
+          }
         });
   }
 

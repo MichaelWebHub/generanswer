@@ -55,14 +55,14 @@ export class AuthEffects {
     })
   );
 
-  @Effect({dispatch: false})
-  authLogout = this.actions$.pipe(
-    ofAction(LogOut),
-    tap(() => {
-      localStorage.removeItem('token');
-      this.router.navigate(['login']);
-    })
-  );
+  // @Effect({dispatch: false})
+  // authLogout = this.actions$.pipe(
+  //   ofAction(LogOut),
+  //   tap(() => {
+  //     localStorage.removeItem('token');
+  //     // this.router.navigate(['login']);
+  //   })
+  // );
 
 
   @Effect()

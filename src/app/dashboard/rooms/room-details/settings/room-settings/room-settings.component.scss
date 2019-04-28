@@ -1,19 +1,12 @@
+@import "../../../../../_utils/index";
+
 .room-actions {
   margin-top: 1rem;
 }
 
 .delete-room {
-  outline: 0;
-  border: 0;
-  padding: 0.3125rem 0.625rem;
-  background: #FF5722;
-  color: #efefef;
-  cursor: pointer;
-  border-radius: 0.3125rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.15s;
+  @include button();
+  background: $pink;
 }
 
 .room-form {
@@ -23,24 +16,10 @@
 }
 
 .room-input {
-  height: 1.5rem;
-  padding: 0.3125rem 0.625rem;
-  border-radius: 0.3125rem;
-  border: 0;
-  color: #323232;
+  @include textInput();
 }
 
 .room-submit {
-  margin-left: 1rem;
-  outline: 0;
-  border: 0;
-  padding: 0.3125rem 0.625rem;
-  background: #4587D3;
-  color: #efefef;
-  cursor: pointer;
-  border-radius: 0.3125rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.15s;
+  @include button();
+  margin-left: rem(16px);
 }

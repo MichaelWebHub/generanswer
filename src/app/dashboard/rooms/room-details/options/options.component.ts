@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {CheckOption, GetOptionsPending, RefreshOptions} from '../../../../_store/actions/options.actions';
@@ -37,6 +37,14 @@ export class OptionsComponent implements OnInit, OnDestroy {
 
   onRefreshClick(): void {
     this._store.dispatch(new RefreshOptions());
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  onKeyPress(e: KeyboardEvent): void {
+    console.log(e.code);
+    if (e.code === 'Escape') {
+      this.onRefreshClick();
+    }
   }
 
 }

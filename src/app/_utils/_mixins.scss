@@ -83,21 +83,41 @@ $rem-px-only: false !default;
   border: 0;
   outline: 0;
   border-radius: $borderRadius;
-  padding: 10px;
-  font-size: 1rem;
+  padding: rem(10px);
+  font-size: rem(16px);
+  color: $darkGrey;
 }
 
-@mixin submitButton() {
+@mixin button($bg: $green) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 0;
   outline: 0;
   border-radius: $borderRadius;
-  padding: 10px;
-  font-size: 1rem;
+  background: $bg;
+  color: $textColor;
+  min-width: rem(80px);
+  padding: rem(10px);
+  font-size: rem(16px);
+  cursor: pointer;
+
+  &[disabled] {
+    opacity: 0.6;
+    cursor: default;
+  }
+}
+
+@mixin checkbox() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: $textColor;
+  border: 1px solid $textColor;
+  border-radius: 0.3125rem;
+  font-size: 0.875rem;
   cursor: pointer;
 }
 
-@mixin standardText() {
-  font-size: rem(16px);
-  font-weight: 400;
-  color: $darkGrey1;
-}

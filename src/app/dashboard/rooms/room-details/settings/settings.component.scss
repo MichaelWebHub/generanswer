@@ -31,6 +31,10 @@
   overflow: auto;
 }
 
+.config__container-right {
+  border-left: 1px solid #888;
+}
+
 .config-form__row {
   margin-top: 1rem;
   display: flex;

@@ -23,11 +23,27 @@
 
 .section__header {
   padding: rem(16px);
+  display: flex;
+  justify-content: flex-end;
 }
 
 .section__header-link {
   color: #efefef;
+  display: flex;
 }
+
+.section__header-link i {
+  transition: 0.4s;
+}
+
+.section__header-link:hover i {
+  transform: rotate(60deg);
+}
+
+.header__link-label {
+  margin-left: 0.3125rem;
+}
+
 
 .app-result {
   height: 100%;

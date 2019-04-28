@@ -28,17 +28,13 @@
 }
 
 .room__title {
-  color: $darkGrey300;
+  color: $darkGrey;
   font-weight: 400;
 }
 
 .room-create__input {
-  display: block;
-  width: 100%;
-  margin-top: 0.75rem;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 0.3125rem;
+  @include textInput();
+  border: 1px solid $lightGrey;
 }
 
 .room-create__input.hidden {
@@ -46,20 +42,8 @@
 }
 
 .room-create__submit {
+  @include button();
   margin-top: 0.625rem;
-  display: inline-block;
-  padding: 0.5rem 1.5rem;
-  border: 1px solid $green;
-  border-radius: 0.3125rem;
-  cursor: pointer;
-  background: $green;
-  color: #efefef;
-  font-weight: 500;
-}
-
-.room-create__submit[disabled] {
-  opacity: 0.5;
-  cursor: default;
 }
 
 .room-create__form {

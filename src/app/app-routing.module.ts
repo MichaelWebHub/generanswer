@@ -4,8 +4,18 @@ import {AuthGuard} from './auth/auth-guard.service';
 import {RoomsComponent} from './dashboard/rooms/rooms.component';
 import {RoomDetailsComponent} from './dashboard/rooms/room-details/room-details.component';
 import {SettingsComponent} from './dashboard/rooms/room-details/settings/settings.component';
+import {SignupComponent} from './auth/signup/signup.component';
+import {LoginComponent} from './auth/login/login.component';
 
 const routes: Routes = [
+  {
+    path: 'signup',
+    component: SignupComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     path: 'dashboard',
     canActivate: [AuthGuard],
@@ -28,12 +38,11 @@ const routes: Routes = [
         redirectTo: 'rooms'
       }
     ]
+  },
+  {
+    path: '**',
+    redirectTo: 'dashboard'
   }
-  // {
-  //   path: 'room/:roomID',
-  //   component: RoomComponent,
-  //   canActivate: [AuthGuard]
-  // },
 ];
 
 @NgModule({
