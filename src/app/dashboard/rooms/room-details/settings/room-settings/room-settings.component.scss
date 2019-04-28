@@ -1,0 +1,46 @@
+.room-actions {
+  margin-top: 1rem;
+}
+
+.delete-room {
+  outline: 0;
+  border: 0;
+  padding: 0.3125rem 0.625rem;
+  background: #FF5722;
+  color: #efefef;
+  cursor: pointer;
+  border-radius: 0.3125rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.15s;
+}
+
+.room-form {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.room-input {
+  height: 1.5rem;
+  padding: 0.3125rem 0.625rem;
+  border-radius: 0.3125rem;
+  border: 0;
+  color: #323232;
+}
+
+.room-submit {
+  margin-left: 1rem;
+  outline: 0;
+  border: 0;
+  padding: 0.3125rem 0.625rem;
+  background: #4587D3;
+  color: #efefef;
+  cursor: pointer;
+  border-radius: 0.3125rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.15s;
+}

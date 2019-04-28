@@ -2,7 +2,10 @@
 
 .options {
   height: 100%;
+  display: flex;
+  flex-direction: column;
   padding: rem(0 16px);
+  overflow: auto;
 }
 
 .checkbox-item {
@@ -44,6 +47,7 @@
 
 .delete-area{
   width: 100%;
+  flex: 1 auto;
   border-top: 1px dashed #FF5722;
   margin-top: rem(16px);
 }

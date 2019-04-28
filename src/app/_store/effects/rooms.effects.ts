@@ -13,7 +13,8 @@ import {
   DeleteRoomSuccess,
   GetRoomsError,
   GetRoomsPending,
-  GetRoomsSuccess
+  GetRoomsSuccess, RenameRoomError,
+  RenameRoomPending, RenameRoomSuccess
 } from '../actions/rooms.actions';
 import {IRoom} from '../interfaces/rooms.interface';
 import {Router} from '@angular/router';
@@ -77,6 +78,26 @@ export class RoomsEffects {
               return new DeleteRoomSuccess(roomId);
             } else {
               return new DeleteRoomError(response.message);
+            }
+          })
+        );
+    })
+  );
+
+  /** ---------------------------------------------------- */
+
+  @Effect()
+  renameRoom = this.actions$.pipe(
+    ofAction(RenameRoomPending),
+    map((action: RenameRoomPending) => action.payload),
+    switchMap((data: {name: string, roomId: string}) => {
+      return this.http.post(`/renameRoom`, data)
+        .pipe(
+          map((response: { status: boolean; message?: string }): any => {
+            if (response.status) {
+              return new RenameRoomSuccess(data);
+            } else {
+              return new RenameRoomError(response.message);
             }
           })
         );

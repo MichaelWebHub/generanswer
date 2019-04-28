@@ -67,3 +67,35 @@ export class DeleteRoomError implements Action {
   constructor(public payload: string) {
   }
 }
+
+/** ---------------------------------------------------- */
+
+export class RenameRoomPending implements Action {
+  public readonly type = '[Rooms] Rename room pending';
+
+  constructor(public payload: {name: string; roomId: string}) {
+  }
+}
+
+export class RenameRoomSuccess implements Action {
+  public readonly type = '[Rooms] Rename room success';
+
+  constructor(public payload: {name: string; roomId: string}) {
+  }
+}
+
+export class RenameRoomError implements Action {
+  public readonly type = '[Rooms] Rename room error';
+
+  constructor(public payload: string) {
+  }
+}
+
+/** ---------------------------------------------------- */
+
+export class SetActiveRoom implements Action {
+  public readonly type = '[Rooms] Set active room';
+
+  constructor(public payload: string) {
+  }
+}

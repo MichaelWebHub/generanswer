@@ -8,11 +8,18 @@ import {GetRoomsError} from '../actions/rooms.actions';
 import {
   CreateOptionError,
   CreateOptionPending,
-  CreateOptionSuccess, DeleteOptionError, DeleteOptionPending, DeleteOptionSuccess, EditOptionError, EditOptionPending, EditOptionSuccess,
+  CreateOptionSuccess,
+  DeleteOptionError,
+  DeleteOptionPending,
+  DeleteOptionSuccess, EditConfigError,
+  EditConfigPending, EditConfigSuccess,
+  EditOptionError,
+  EditOptionPending,
+  EditOptionSuccess,
   GetSettingsPending,
   GetSettingsSuccess
 } from '../actions/settings.actions';
-import {IOption, ISettingsStore} from '../interfaces/settings.interface';
+import {IConfig, IOption, ISettingsStore} from '../interfaces/settings.interface';
 
 @Injectable()
 export class SettingsEffects {
@@ -97,6 +104,25 @@ export class SettingsEffects {
     })
   );
 
+  /** ---------------------------------------------------- */
+
+  @Effect()
+  editConfig = this.actions$.pipe(
+    ofAction(EditConfigPending),
+    map((action: EditConfigPending) => action.payload),
+    switchMap((data: {roomId: string; config: IConfig}) => {
+      return this.http.post(`/editConfig/`, data)
+        .pipe(
+          map((response: { status: boolean; message?: string }) => {
+            if (response.status) {
+              return new EditConfigSuccess(data.config);
+            } else {
+              return new EditConfigError(response.message);
+            }
+          })
+        );
+    })
+  );
 
   constructor(private actions$: Actions,
               private http: HttpClient) {

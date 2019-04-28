@@ -28,6 +28,9 @@ import {SettingsEffects} from './_store/effects/settings.effects';
 import {SettingsReducer} from './_store/reducers/settings.reducer';
 import {OptionsReducer} from './_store/reducers/options.reducer';
 import {OptionsEffects} from './_store/effects/options.effects';
+import { RoomSettingsComponent } from './dashboard/rooms/room-details/settings/room-settings/room-settings.component';
+import { OptionsSettingsComponent } from './dashboard/rooms/room-details/settings/options-settings/options-settings.component';
+import { ConfigSettingsComponent } from './dashboard/rooms/room-details/settings/config-settings/config-settings.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import {OptionsEffects} from './_store/effects/options.effects';
     RoomDetailsComponent,
     ResultComponent,
     SettingsComponent,
-    OptionsComponent
+    OptionsComponent,
+    RoomSettingsComponent,
+    OptionsSettingsComponent,
+    ConfigSettingsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),

@@ -1,0 +1,55 @@
+<div class="back-button" (click)="onBackButtonClick()">
+  <i class="fal fa-arrow-left"></i>
+  <p class="back-button__label"> Back </p>
+</div>
+
+
+<form class="config-form" #configForm="ngForm" (submit)="onAddCheckBoxSubmit(configForm)">
+
+  <div class="config-form__row">
+    <p class="config-label"> Label: </p>
+    <input type="text" class="config-input" name="label" ngModel required autocomplete="off">
+  </div>
+
+  <div class="config-form__row">
+    <p class="config-label"> Text: </p>
+    <textarea type="text" class="config-textarea" name="text" ngModel required autocomplete="off"></textarea>
+  </div>
+
+  <div class="config-form_buttons">
+    <button class="config-form__button" [disabled]="!configForm.valid"> Create</button>
+    <!--              <app-preloader *ngIf="saveOptionPreloader"></app-preloader>-->
+  </div>
+
+</form>
+
+<form class="config-form" #configEditForm="ngForm" (submit)="onEditCheckBoxSubmit(configEditForm)"
+      *ngIf="(options$ | async).length > 0">
+
+  <div class="form-group" *ngFor="let option of (options$ | async); let i = index" ngModelGroup="data-{{i}}">
+
+    <input type="text" name="_id" [ngModel]="option._id" class="hidden">
+
+    <div class="config-form__row">
+      <p class="config-label"> Label: </p>
+      <input type="text" class="config-input" name="label" [ngModel]="option.label" autocomplete="off">
+    </div>
+
+    <div class="config-form__row">
+      <p class="config-label"> Text: </p>
+      <textarea type="text" class="config-textarea" name="text" [ngModel]="option.text"
+                autocomplete="off"></textarea>
+    </div>
+
+    <div class="config-form__row">
+      <p class="delete-checkbox"><span class="delete-checkbox__label" (click)="onDeleteCheckboxClick(option)"> Delete </span>
+      </p>
+    </div>
+  </div>
+
+  <div class="config-form_buttons">
+    <button class="config-form__button"> Save</button>
+    <!--              <app-preloader *ngIf="updateOptionsPreloader"></app-preloader>-->
+  </div>
+
+</form>

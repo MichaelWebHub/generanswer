@@ -1,10 +1,10 @@
 import {Action, Store} from 'ngrx-actions/dist';
-import {CreateRoomSuccess, DeleteRoomSuccess, GetRoomsSuccess} from '../actions/rooms.actions';
+import {CreateRoomSuccess, DeleteRoomSuccess, GetRoomsSuccess, RenameRoomSuccess, SetActiveRoom} from '../actions/rooms.actions';
 import {IRoomsStore} from '../interfaces/rooms.interface';
 
 @Store({
   collection: [],
-  selections: {},
+  selection: {},
   loading: false
 })
 export class RoomsReducer {
@@ -18,6 +18,19 @@ export class RoomsReducer {
   @Action(GetRoomsSuccess)
   getRoomsSuccess(state: IRoomsStore, action: GetRoomsSuccess) {
     state.collection = action.payload;
+  }
+
+  @Action(SetActiveRoom)
+  setActiveRoom(state: IRoomsStore, action: SetActiveRoom) {
+    const index = state.collection.findIndex(it => it._id === action.payload);
+    state.selection = state.collection[index];
+  }
+
+  @Action(RenameRoomSuccess)
+  renameRoom(state: IRoomsStore, action: RenameRoomSuccess) {
+    const index = state.collection.findIndex(it => it._id === action.payload.roomId);
+    state.collection[index].name = action.payload.name;
+    state.selection = state.collection[index];
   }
 
   @Action(DeleteRoomSuccess)

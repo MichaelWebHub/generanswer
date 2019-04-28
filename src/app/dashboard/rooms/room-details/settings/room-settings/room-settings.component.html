@@ -1,0 +1,12 @@
+<form class="room-form" #form="ngForm" (submit)="renameRoom(form)">
+
+  <input type="text" class="room-input" name="name" [ngModel]="(room$ | async).name" required>
+
+  <button class="room-submit">Rename</button>
+
+</form>
+
+
+<div class="room-actions">
+  <button class="delete-room" (click)="deleteRoom()">Delete Room</button>
+</div>

@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {IOption, ISettingsStore} from '../interfaces/settings.interface';
+import {IConfig, IOption, ISettingsStore} from '../interfaces/settings.interface';
 
 
 /** Settings GET actions */
@@ -94,3 +94,30 @@ export class EditOptionError implements Action {
   }
 }
 
+/** Edit config actions */
+
+export class EditConfigPending implements Action {
+  public readonly type = '[Settings] Edit config pending';
+
+  constructor(public payload: {roomId: string, config: IConfig}) {
+  }
+}
+
+export class EditConfigSuccess implements Action {
+  public readonly type = '[Settings] Edit config success';
+
+  constructor(public payload: IConfig) {
+  }
+}
+
+export class EditConfigError implements Action {
+  public readonly type = '[Settings] Edit config error';
+
+  constructor(public payload: string) {
+  }
+}
+
+/** Add new input */
+export class AddNewInput implements Action {
+  public readonly type = '[Settings] Add new input';
+}

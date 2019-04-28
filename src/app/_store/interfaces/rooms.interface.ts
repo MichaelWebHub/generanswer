@@ -6,6 +6,6 @@ export interface IRoom {
 
 export interface IRoomsStore {
   collection: IRoom[];
-  selections: {};
+  selection: IRoom;
   loading: false;
 }

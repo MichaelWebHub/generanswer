@@ -119,6 +119,39 @@ const editOptions = (req, res) => {
           })
       });
   });
+};
+
+const editConfig = (req, res) => {
+  return new Promise((resolve, reject) => {
+    db()
+      .then(() => {
+
+        RoomSettings.findOne({roomId: req.body.roomId})
+          .then((result) => {
+
+            result.config = req.body.config;
+
+            result.save().then(() => {
+              resolve({
+                status: true
+              })
+            })
+              .catch(e => {
+                resolve({
+                  status: false,
+                  message: e.message
+                });
+              })
+
+          })
+          .catch(() => {
+            resolve({
+              status: false,
+              message: MESSAGE.error
+            });
+          })
+      });
+  });
 }
 
 const deleteOption = (req, res) => {
@@ -153,5 +186,5 @@ const deleteOption = (req, res) => {
 };
 
 module.exports = {
-  getSettings, createOption, getOptions, deleteOption, editOptions
+  getSettings, createOption, getOptions, deleteOption, editOptions, editConfig
 };

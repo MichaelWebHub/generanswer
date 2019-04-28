@@ -3,8 +3,8 @@ const express = require('express');
 const jsonParser = require('body-parser').json();
 
 const {signUp, logIn, verifyToken, checkToken} = require('./backend/auth');
-const {getRooms, createRoom, deleteRoom} = require('./backend/rooms');
-const {getSettings, createOption, getOptions, deleteOption, editOptions} = require('./backend/options');
+const {getRooms, createRoom, deleteRoom, renameRoom} = require('./backend/rooms');
+const {getSettings, createOption, getOptions, deleteOption, editOptions, editConfig} = require('./backend/options');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -55,6 +55,20 @@ app.post('/createRoom', jsonParser, (req, res) => {
   })
 });
 
+/** Rename room */
+app.post('/renameRoom', jsonParser, (req, res) => {
+  renameRoom(req, res).then(r => {
+    res.json(r);
+  })
+});
+
+/** Delete room */
+app.get('/deleteRoom/:roomId', (req, res) => {
+  deleteRoom(req, res).then(r => {
+    res.json(r);
+  })
+});
+
 /************************** Room Settings **************************/
 
 /** Get rooms' settings */
@@ -85,18 +99,18 @@ app.post('/editOptions', jsonParser, (req, res) => {
   })
 });
 
-/************************** Options **************************/
-
-/** Get all rooms */
-app.get('/getOptions/:roomId', (req, res) => {
-  getOptions(req, res).then(r => {
+/** Edit config */
+app.post('/editConfig', jsonParser, (req, res) => {
+  editConfig(req, res).then(r => {
     res.json(r);
   })
 });
 
-/** Delete room */
-app.get('/deleteRoom/:roomId', (req, res) => {
-  deleteRoom(req, res).then(r => {
+/************************** Options **************************/
+
+/** Get room options */
+app.get('/getOptions/:roomId', (req, res) => {
+  getOptions(req, res).then(r => {
     res.json(r);
   })
 });
