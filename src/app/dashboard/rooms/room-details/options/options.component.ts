@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {CheckOption, GetOptionsPending, RefreshOptions} from '../../../../_store/actions/options.actions';
@@ -11,7 +11,7 @@ import {IOption} from '../../../../_store/interfaces/settings.interface';
   templateUrl: './options.component.html',
   styleUrls: ['./options.component.scss']
 })
-export class OptionsComponent implements OnInit {
+export class OptionsComponent implements OnInit, OnDestroy {
 
   @Select('options.collection')
   options$: Observable<IOption[]>;
@@ -22,6 +22,10 @@ export class OptionsComponent implements OnInit {
 
   ngOnInit() {
     this._store.dispatch(new GetOptionsPending(this._route.snapshot.params.roomId));
+  }
+
+  ngOnDestroy(): void {
+    this.onRefreshClick();
   }
 
   onCheckboxClick(item: any): void {
