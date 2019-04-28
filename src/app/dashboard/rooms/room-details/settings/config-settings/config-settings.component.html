@@ -23,7 +23,7 @@
              [ngModel]="input" autocomplete="off"
              *ngFor="let input of (config$ | async).textStart; let i = index"
              [placeholder]="'If ' + (i + 1) + ' option(s) checked...'">
-      <div class="add-input__button" (click)="addInput(1)"><i class="fal fa-plus"></i></div>
+      <div class="add-input__button" (click)="addInput()"><i class="fal fa-plus"></i></div>
     </div>
   </div>
 
