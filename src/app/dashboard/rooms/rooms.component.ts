@@ -6,6 +6,7 @@ import {IUser} from '../../_store/interfaces/auth.interface';
 import {CreateRoomPending, GetRoomsPending} from '../../_store/actions/rooms.actions';
 import {IRoom} from '../../_store/interfaces/rooms.interface';
 import {takeUntil} from 'rxjs/operators';
+import {IStore} from '../../_store/interfaces/store.interface';
 
 @Component({
   selector: 'app-rooms',
@@ -23,7 +24,7 @@ export class RoomsComponent implements OnInit, OnDestroy {
   /** Объект для отписки */
   control$$: Subject<boolean> = new Subject();
 
-  constructor(private _store: Store<any>) {
+  constructor(private _store: Store<IStore>) {
   }
 
   ngOnInit(): void {

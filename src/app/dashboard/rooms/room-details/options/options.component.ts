@@ -5,6 +5,7 @@ import {CheckOption, GetOptionsPending, RefreshOptions} from '../../../../_store
 import {Select} from 'ngrx-actions/dist';
 import {Observable} from 'rxjs';
 import {IOption} from '../../../../_store/interfaces/settings.interface';
+import {IStore} from '../../../../_store/interfaces/store.interface';
 
 @Component({
   selector: 'app-options',
@@ -17,7 +18,7 @@ export class OptionsComponent implements OnInit, OnDestroy {
   options$: Observable<IOption[]>;
 
   constructor(private _route: ActivatedRoute,
-              private _store: Store<any>) {
+              private _store: Store<IStore>) {
   }
 
   ngOnInit() {

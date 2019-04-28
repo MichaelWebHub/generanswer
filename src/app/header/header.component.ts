@@ -3,6 +3,7 @@ import {Select} from 'ngrx-actions/dist';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {LogOut} from '../_store/actions/auth.actions';
+import {IStore} from '../_store/interfaces/store.interface';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class HeaderComponent implements OnInit {
   @Select('auth.authenticated')
   authenticated$: Observable<boolean>;
 
-  constructor(private _store: Store<any>) {
+  constructor(private _store: Store<IStore>) {
   }
 
   ngOnInit(): void {

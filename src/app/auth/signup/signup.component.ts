@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {SignUpPending} from '../../_store/actions/auth.actions';
+import {IStore} from '../../_store/interfaces/store.interface';
 
 @Component({
   selector: 'app-signup',
@@ -14,7 +15,7 @@ export class SignupComponent implements OnInit {
   message = '';
 
   constructor(private router: Router,
-              private _store: Store<any>) {
+              private _store: Store<IStore>) {
   }
 
   ngOnInit(): void {

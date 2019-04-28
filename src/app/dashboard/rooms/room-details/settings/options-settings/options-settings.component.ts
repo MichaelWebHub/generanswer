@@ -6,6 +6,7 @@ import {CreateOptionPending, DeleteOptionPending, EditOptionPending} from '../..
 import {Location} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {Store} from '@ngrx/store';
+import {IStore} from '../../../../../_store/interfaces/store.interface';
 
 @Component({
   selector: 'app-options-settings',
@@ -19,7 +20,7 @@ export class OptionsSettingsComponent implements OnInit {
 
   constructor(private _location: Location,
               private _route: ActivatedRoute,
-              private _store: Store<any>) {
+              private _store: Store<IStore>) {
   }
 
   ngOnInit() {

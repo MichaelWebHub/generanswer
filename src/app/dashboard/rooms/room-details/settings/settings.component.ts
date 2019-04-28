@@ -6,6 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Select} from 'ngrx-actions/dist';
 import {IOption} from '../../../../_store/interfaces/settings.interface';
+import {IStore} from '../../../../_store/interfaces/store.interface';
 
 @Component({
   selector: 'app-settings',
@@ -22,7 +23,7 @@ export class SettingsComponent implements OnInit {
 
   constructor(private _location: Location,
               private _route: ActivatedRoute,
-              private _store: Store<any>) {
+              private _store: Store<IStore>) {
   }
 
   ngOnInit() {

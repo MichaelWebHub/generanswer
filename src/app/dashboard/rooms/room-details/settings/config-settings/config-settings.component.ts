@@ -5,6 +5,7 @@ import {IConfig} from '../../../../../_store/interfaces/settings.interface';
 import {Store} from '@ngrx/store';
 import {AddNewInput, EditConfigPending} from '../../../../../_store/actions/settings.actions';
 import {ActivatedRoute} from '@angular/router';
+import {IStore} from '../../../../../_store/interfaces/store.interface';
 
 @Component({
   selector: 'app-config-settings',
@@ -16,7 +17,7 @@ export class ConfigSettingsComponent implements OnInit {
   @Select('settings.config')
   config$: Observable<IConfig>;
 
-  constructor(private _store: Store<any>,
+  constructor(private _store: Store<IStore>,
               private _route: ActivatedRoute) {
   }
 

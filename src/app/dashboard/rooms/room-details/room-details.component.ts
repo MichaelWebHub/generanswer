@@ -3,6 +3,7 @@ import {Store} from '@ngrx/store';
 import {SetActiveRoom} from '../../../_store/actions/rooms.actions';
 import {ActivatedRoute} from '@angular/router';
 import {GetSettingsPending} from '../../../_store/actions/settings.actions';
+import {IStore} from '../../../_store/interfaces/store.interface';
 
 @Component({
   selector: 'app-room-details',
@@ -11,7 +12,7 @@ import {GetSettingsPending} from '../../../_store/actions/settings.actions';
 })
 export class RoomDetailsComponent implements OnInit {
 
-  constructor(private _store: Store<any>,
+  constructor(private _store: Store<IStore>,
               private _route: ActivatedRoute) {
   }
 

@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Select} from 'ngrx-actions/dist';
 import {Observable} from 'rxjs';
 import {IRoom} from '../../../../../_store/interfaces/rooms.interface';
+import {IStore} from '../../../../../_store/interfaces/store.interface';
 
 @Component({
   selector: 'app-room-settings',
@@ -16,7 +17,7 @@ export class RoomSettingsComponent implements OnInit {
   @Select('rooms.selection')
   room$: Observable<IRoom>;
 
-  constructor(private _store: Store<any>,
+  constructor(private _store: Store<IStore>,
               private _route: ActivatedRoute) {
   }
 
