@@ -11,7 +11,6 @@ export class HttpInterceptorService implements HttpInterceptor {
   }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler) {
-    console.log(this._baseUrl);
     const jsonReq = req.clone({url: `${this._baseUrl}${req.url}`});
     return next.handle(jsonReq);
   }
