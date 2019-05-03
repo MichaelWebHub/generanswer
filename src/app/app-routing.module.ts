@@ -6,6 +6,7 @@ import {RoomDetailsComponent} from './dashboard/rooms/room-details/room-details.
 import {SettingsComponent} from './dashboard/rooms/room-details/settings/settings.component';
 import {SignupComponent} from './auth/signup/signup.component';
 import {LoginComponent} from './auth/login/login.component';
+import {ConfirmEmailComponent} from './auth/confirm-email/confirm-email.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'confirm-email/:token',
+    component: ConfirmEmailComponent
   },
   {
     path: 'dashboard',

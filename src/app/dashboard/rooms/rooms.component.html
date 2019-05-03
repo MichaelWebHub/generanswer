@@ -8,11 +8,14 @@
 
   <div class="room room-form">
     <div class="room__inner">
-      <form class="room-create__form" #createRoomForm="ngForm" (submit)="createRoom(createRoomForm)">
+      <form class="room-create__form" #createRoomForm="ngForm" (submit)="createRoom(createRoomForm)" *ngIf="(user$ | async).statusId > 0; else message">
         <input class="room-create__input hidden" type="text" name="userId" [ngModel]="(user$ | async)._id">
         <input class="room-create__input" type="text" name="name" ngModel placeholder="New room" required>
         <button class="room-create__submit" [disabled]="createRoomForm.invalid"> Save</button>
       </form>
+      <ng-template #message>
+        <h3 class="room__title">Confirm your email to create room</h3>
+      </ng-template>
     </div>
   </div>
 </div>

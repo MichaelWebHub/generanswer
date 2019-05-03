@@ -2,7 +2,7 @@ const helmet = require('helmet');
 const express = require('express');
 const jsonParser = require('body-parser').json();
 
-const {signUp, logIn, verifyToken, checkToken} = require('./backend/auth');
+const {signUp, logIn, verifyToken, checkToken, changeStatus} = require('./backend/auth');
 const {getRooms, createRoom, deleteRoom, renameRoom} = require('./backend/rooms');
 const {getSettings, createOption, getOptions, deleteOption, editOptions, editConfig} = require('./backend/options');
 
@@ -35,6 +35,13 @@ app.post('/login', jsonParser, (req, res) => {
 /** Sign up */
 app.post('/signup', jsonParser, (req, res) => {
   signUp(req, res).then(r => {
+    res.json(r);
+  })
+});
+
+/** Confirm email */
+app.get('/confirm-email/:token', verifyToken, function (req, res) {
+  changeStatus(req, res).then(r => {
     res.json(r);
   })
 });

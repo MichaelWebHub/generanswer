@@ -2,6 +2,7 @@ const db = require('../database/connection');
 const Users = require('../database/users.schema');
 const Credentials = require('../database/credentials.schema');
 const MESSAGE = require('./_common');
+const { confirmEmail } = require('./nodemailer');
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -83,10 +84,7 @@ const signUp = (req, res) => {
           .catch(() => {
             const user = new Users({
               email: req.body.email,
-              name: req.body.name || '',
-              surname: req.body.surname || '',
-              country: '',
-              statusId: 1
+              statusId: 0
             });
 
             user.save()
@@ -109,13 +107,15 @@ const signUp = (req, res) => {
                       expiresIn: 86400 // expires in 24 hours
                     });
 
+                    confirmEmail(req.body.email, token);
+
                     resolve({
                       user: result,
                       status: true,
                       token: token,
                       message: 'Успех'
                     });
-                });
+                  });
                 });
               });
           });
@@ -197,6 +197,40 @@ checkToken = (req, res) => {
   )
 };
 
+changeStatus = (req, res) => {
+  return new Promise((resolve, reject) => {
+
+      const ulogin = req.decoded.login;
+
+      db()
+        .then(() => {
+          Users.findOneAndUpdate({email: ulogin}, {statusId: 1})
+            .then((result) => {
+              if (result) {
+
+                resolve({
+                  user: result,
+                  status: true
+                })
+              } else {
+                throw new Error();
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+              resolve({
+                user: {},
+                nStatus: false
+              })
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+  )
+};
+
 module.exports = {
-  signUp, logIn, verifyToken, checkToken
+  signUp, logIn, verifyToken, checkToken, changeStatus
 };

@@ -31,6 +31,7 @@ import {OptionsEffects} from './_store/effects/options.effects';
 import { RoomSettingsComponent } from './dashboard/rooms/room-details/settings/room-settings/room-settings.component';
 import { OptionsSettingsComponent } from './dashboard/rooms/room-details/settings/options-settings/options-settings.component';
 import { ConfigSettingsComponent } from './dashboard/rooms/room-details/settings/config-settings/config-settings.component';
+import { ConfirmEmailComponent } from './auth/confirm-email/confirm-email.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ConfigSettingsComponent } from './dashboard/rooms/room-details/settings
     OptionsComponent,
     RoomSettingsComponent,
     OptionsSettingsComponent,
-    ConfigSettingsComponent
+    ConfigSettingsComponent,
+    ConfirmEmailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
