@@ -20,6 +20,7 @@ const ConfigSchema = new Schema({
   textAreaTextColor: String,
   textAreaCopyBackground: String,
   isEnumerable: {type: Boolean, default: true},
+  showGreetings: {type: Boolean, default: true},
   showStartText: {type: Boolean, default: true},
   showEndText: {type: Boolean, default: false}
 });

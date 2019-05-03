@@ -30,5 +30,6 @@ export interface IConfig {
   textAreaCopyBackground: string;
   isEnumerable: boolean;
   showStartText: boolean;
+  showGreetings: boolean;
   showEndText: boolean;
 }

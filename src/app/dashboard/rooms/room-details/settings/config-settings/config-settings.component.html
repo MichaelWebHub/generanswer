@@ -1,6 +1,15 @@
 <form class="config-form" #globalConfigForm="ngForm" (submit)="onEditGlobalConfig(globalConfigForm)">
 
   <div class="config-form__row">
+    <p class="config-label"> Show greetings: </p>
+    <label class="custom__checkbox">
+      <input type="checkbox" class="config-checkbox hidden" name="showGreetings"
+             [ngModel]="(config$ | async).showGreetings"
+             autocomplete="off">
+      <span class="config-checkbox__custom"> <i class="fal fa-check"></i></span></label>
+  </div>
+
+  <div class="config-form__row">
     <p class="config-label"> Greetings: </p>
     <input type="text" class="config-input" name="textGreetings" [ngModel]="(config$ | async).textGreetings"
            autocomplete="off">

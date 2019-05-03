@@ -1,6 +1,6 @@
 <div class="text-area" #textarea (click)="copyToClipboard(textarea)" (mouseup)="makeBgTransition(textarea)">
 
-  <div class="text-row">
+  <div class="text-row" *ngIf="(config$ | async).showGreetings">
     <span class="text__text">{{(config$ | async).textGreetings + '\n'}}</span>
   </div>
 
