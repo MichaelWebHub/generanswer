@@ -31,8 +31,6 @@ const confirmEmail = (email, token) => {
     if (error) {
       console.log(error);
     }
-
-    console.log(info);
   });
 };
 

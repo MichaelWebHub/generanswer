@@ -45,3 +45,10 @@ export class LogInError implements Action {
 export class LogOut implements Action {
   public readonly type = '[Auth] Log out';
 }
+
+export class ConfirmEmail implements Action {
+  public readonly type = '[Auth] Confirm Email';
+
+  constructor(public payload: string) {
+  }
+}

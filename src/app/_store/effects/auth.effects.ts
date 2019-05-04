@@ -7,7 +7,7 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {ofAction} from 'ngrx-actions/dist';
-import {CheckTokenPending, LogIn, LogInError, LogInPending, LogOut, SignUpPending} from '../actions/auth.actions';
+import {CheckTokenPending, ConfirmEmail, LogIn, LogInError, LogInPending, LogOut, SignUpPending} from '../actions/auth.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -55,14 +55,18 @@ export class AuthEffects {
     })
   );
 
-  // @Effect({dispatch: false})
-  // authLogout = this.actions$.pipe(
-  //   ofAction(LogOut),
-  //   tap(() => {
-  //     localStorage.removeItem('token');
-  //     // this.router.navigate(['login']);
-  //   })
-  // );
+  @Effect({dispatch: false})
+  confirmEmail = this.actions$.pipe(
+    ofAction(ConfirmEmail),
+    switchMap((token: ConfirmEmail) => {
+      return this.http.get(`/confirm-email/${token.payload}`)
+        .pipe(
+          map(() => {
+            this.router.navigate(['dashboard']);
+          })
+        );
+    })
+  );
 
 
   @Effect()
