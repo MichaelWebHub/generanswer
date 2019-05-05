@@ -2,7 +2,7 @@ const helmet = require('helmet');
 const express = require('express');
 const jsonParser = require('body-parser').json();
 
-const {signUp, logIn, verifyToken, checkToken, changeStatus, removeUnverifiedUsers} = require('./backend/auth');
+const {signUp, logIn, verifyToken, checkToken, changeStatus, removeUnverifiedUsers, sendPasswordResetLink, resetPassword} = require('./backend/auth');
 const {getRooms, createRoom, deleteRoom, renameRoom} = require('./backend/rooms');
 const {getSettings, createOption, getOptions, deleteOption, editOptions, editConfig} = require('./backend/options');
 
@@ -19,7 +19,7 @@ app.use(helmet());
 
 /************************** Authentication **************************/
 /** Check for token */
-app.get('/check/:token', verifyToken, function (req, res) {
+app.get('/check/:token', verifyToken, (req, res) => {
   checkToken(req, res).then(r => {
     res.json(r);
   })
@@ -40,8 +40,21 @@ app.post('/signup', jsonParser, (req, res) => {
 });
 
 /** Confirm email */
-app.get('/confirm-email/:token', verifyToken, function (req, res) {
+app.get('/confirm-email/:token', verifyToken, (req, res) => {
   changeStatus(req, res).then(r => {
+    res.json(r);
+  })
+});
+
+/** Request password reset */
+app.post('/request-reset', jsonParser, (req, res) => {
+  sendPasswordResetLink(req, res);
+  res.json();
+});
+
+/** Reset password */
+app.post('/reset-password', jsonParser, (req, res) => {
+  resetPassword(req, res).then(r => {
     res.json(r);
   })
 });

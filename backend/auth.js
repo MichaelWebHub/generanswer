@@ -2,7 +2,7 @@ const db = require('../database/connection');
 const Users = require('../database/users.schema');
 const Credentials = require('../database/credentials.schema');
 const MESSAGE = require('./_common');
-const {confirmEmail} = require('./nodemailer');
+const {confirmEmail, sendResetLink} = require('./nodemailer');
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -221,7 +221,7 @@ changeStatus = (req, res) => {
               console.log(err);
               resolve({
                 user: {},
-                nStatus: false
+                status: false
               })
             });
         })
@@ -230,6 +230,39 @@ changeStatus = (req, res) => {
         })
     }
   )
+};
+
+const sendPasswordResetLink = (req, res) => {
+  bcrypt.hash(req.body.email, 10).then((hash) => {
+    sendResetLink(req.body.email, hash);
+  });
+};
+
+const resetPassword = (req, res) => {
+  return new Promise((resolve, reject) => {
+    db()
+      .then(() => {
+        bcrypt.compare(req.body.email, req.body.hash).then((res) => {
+          if (res) {
+            Users.findOne({email: req.body.email}).then((user) => {
+
+              bcrypt.hash(req.body.password, saltRounds).then((hash) => {
+                Credentials.findOneAndUpdate({userId: user._id}, {userPassword: hash}).then(() => {
+                  resolve({
+                    status: true
+                  });
+                })
+                  .catch(e => console.log(e));
+              })
+                .catch(e => console.log(e));
+            });
+          }
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  });
 };
 
 const removeUnverifiedUsers = () => {
@@ -263,8 +296,8 @@ const removeUser = (id) => {
     .catch((err) => {
       console.log(err);
     })
-}
+};
 
 module.exports = {
-  signUp, logIn, verifyToken, checkToken, changeStatus, removeUnverifiedUsers
+  signUp, logIn, verifyToken, checkToken, changeStatus, removeUnverifiedUsers, sendPasswordResetLink, resetPassword
 };

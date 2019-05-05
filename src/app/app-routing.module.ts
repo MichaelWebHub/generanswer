@@ -7,6 +7,8 @@ import {SettingsComponent} from './dashboard/rooms/room-details/settings/setting
 import {SignupComponent} from './auth/signup/signup.component';
 import {LoginComponent} from './auth/login/login.component';
 import {ConfirmEmailComponent} from './auth/confirm-email/confirm-email.component';
+import {ForgotPasswordComponent} from './auth/forgot-password/forgot-password.component';
+import {ChangePasswordComponent} from './auth/change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -16,6 +18,14 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent
+  },
+  {
+    path: 'reset-password/:hash/:email',
+    component: ChangePasswordComponent
   },
   {
     path: 'confirm-email/:token',

@@ -32,6 +32,8 @@ import { RoomSettingsComponent } from './dashboard/rooms/room-details/settings/r
 import { OptionsSettingsComponent } from './dashboard/rooms/room-details/settings/options-settings/options-settings.component';
 import { ConfigSettingsComponent } from './dashboard/rooms/room-details/settings/config-settings/config-settings.component';
 import { ConfirmEmailComponent } from './auth/confirm-email/confirm-email.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './auth/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { ConfirmEmailComponent } from './auth/confirm-email/confirm-email.compon
     RoomSettingsComponent,
     OptionsSettingsComponent,
     ConfigSettingsComponent,
-    ConfirmEmailComponent
+    ConfirmEmailComponent,
+    ForgotPasswordComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),

@@ -52,3 +52,28 @@ export class ConfirmEmail implements Action {
   constructor(public payload: string) {
   }
 }
+
+export class RequestResetPassword implements Action {
+  public readonly type = '[Auth] Send reset password link';
+
+  constructor(public payload: string) {
+  }
+}
+
+export class ResetPasswordPending implements Action {
+  public readonly type = '[Auth] Reset Password Pending';
+
+  constructor(public payload: {password: string; hash: string, email: string}) {
+  }
+}
+
+export class ResetPasswordSuccess implements Action {
+  public readonly type = '[Auth] Reset Password Success';
+}
+
+export class ResetPasswordError implements Action {
+  public readonly type = '[Auth] Reset Password Error';
+
+  constructor(public payload: string) {
+  }
+}

@@ -6,7 +6,7 @@
     </div>
 
     <div class="form__row">
-      <input type="text" class="form__input--text" placeholder="Password" name="password" ngModel required>
+      <input type="password" class="form__input--text" placeholder="Password" name="password" ngModel required>
     </div>
 
     <div class="form__buttons">
@@ -16,7 +16,8 @@
 
 
     <footer class="form__footer">
-      I don't have an account. <span class="form__footer-link" (click)="signUp()">Sign up</span>
+      <p class="footer__row"> I don't have an account. <span class="form__footer-link" (click)="signUp()">Sign up</span> </p>
+      <p class="footer__row"> <span class="form__footer-link" (click)="forgotPassword()">Forgot password</span> </p>
     </footer>
 
   </form>

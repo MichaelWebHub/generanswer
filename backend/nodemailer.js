@@ -37,6 +37,27 @@ const confirmEmail = (email, token) => {
   });
 };
 
+const sendResetLink = (email, hash) => {
+
+  const options = {
+    from: 'Generanswer',
+    to: email,
+    subject: 'Generanswer password reset',
+    html: `
+<div style="padding: 20px; color: #333; font-family: sans-serif">
+  <h3 style="font-size: 18px">Generanswer Password Reset</h3>
+  <a style="display: inline-block; padding: 6px 12px; text-decoration: none; background: #39a379; color: white; border-radius: 5px" href="https://generanswer.herokuapp.com/reset-password/${hash}/${email}">Reset Password</a>
+</div>
+`
+  };
+
+  transporter.sendMail(options, (error, info) => {
+    if (error) {
+      console.log(error);
+    }
+  });
+};
+
 module.exports = {
-  confirmEmail
+  confirmEmail, sendResetLink
 };

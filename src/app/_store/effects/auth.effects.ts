@@ -1,13 +1,21 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
 
-import {map, switchMap, tap} from 'rxjs/operators';
+import {catchError, map, switchMap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {ofAction} from 'ngrx-actions/dist';
-import {CheckTokenPending, ConfirmEmail, LogIn, LogInError, LogInPending, LogOut, SignUpPending} from '../actions/auth.actions';
+import {
+  CheckTokenPending,
+  ConfirmEmail,
+  LogIn,
+  LogInError,
+  LogInPending,
+  RequestResetPassword, ResetPasswordError, ResetPasswordPending, ResetPasswordSuccess,
+  SignUpPending
+} from '../actions/auth.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -64,6 +72,33 @@ export class AuthEffects {
           map(() => {
             this.router.navigate(['dashboard']);
           })
+        );
+    })
+  );
+
+  @Effect({dispatch: false})
+  requestResetPasswordLink = this.actions$.pipe(
+    ofAction(RequestResetPassword),
+    switchMap((data: RequestResetPassword) => {
+      return this.http.post(`/request-reset`, data.payload);
+    })
+  );
+
+  @Effect()
+  resetPassword = this.actions$.pipe(
+    ofAction(ResetPasswordPending),
+    switchMap((data: ResetPasswordPending) => {
+      return this.http.post(`/reset-password`, data.payload)
+        .pipe(
+          map((response: {status: boolean; message: string}) => {
+            if (response.status) {
+              this.router.navigate(['login']);
+              return new ResetPasswordSuccess();
+            } else {
+              return new ResetPasswordError(response.message);
+            }
+          }),
+          catchError((error) => of(new ResetPasswordError(error)))
         );
     })
   );
