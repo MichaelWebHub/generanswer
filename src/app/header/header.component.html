@@ -1,7 +1,12 @@
 <header class="header">
   <nav class="nav">
     <a class="nav__link" routerLink="dashboard"> Dashboard </a>
-    <a class="nav__link" *ngIf="!(authenticated$ | async)" routerLink="login"> Login </a>
-    <a class="nav__link" *ngIf="authenticated$ | async" (click)="logOut()"> Logout </a>
+
+    <div class="nav__auth">
+      <a class="nav__link" *ngIf="!(authenticated$ | async)" routerLink="login"> Login </a>
+
+      <span class="nav__link" *ngIf="authenticated$ | async">{{(user$ | async).email}}</span>
+      <a class="nav__link" *ngIf="authenticated$ | async" (click)="logOut()"> Logout </a>
+    </div>
   </nav>
 </header>
