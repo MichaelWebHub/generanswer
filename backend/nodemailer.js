@@ -20,11 +20,14 @@ const confirmEmail = (email, token) => {
     from: 'Generanswer',
     to: email,
     subject: 'Generanswer email confirmation',
-    html: `<p>Please, confirm your email</p> 
-    <p>
-      <a style="display: inline-block; padding: 12px; background: #39a379; color: white; border-radius: 5px" 
-      href="http://localhost:4200/confirm-email/${token}">Confirm</a>
-    </p>`
+    html: `
+<div style="padding: 20px; color: #333; font-family: sans-serif">
+  <h3 style="font-size: 18px">Generanswer Email verification</h3>
+  <p style="margin: 16px 0"> You have created Generanswer account. To create Rooms please confirm your email.</p>
+  <a style="display: inline-block; padding: 6px 12px; text-decoration: none; background: #39a379; color: white; border-radius: 5px" href="https://generanswer.herokuapp.com/confirm-email/${token}">Confirm</a>
+  <p style="margin: 16px 0"> Thank you!</p>
+</div>
+`
   };
 
   transporter.sendMail(options, (error, info) => {

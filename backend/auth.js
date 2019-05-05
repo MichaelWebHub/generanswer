@@ -2,7 +2,7 @@ const db = require('../database/connection');
 const Users = require('../database/users.schema');
 const Credentials = require('../database/credentials.schema');
 const MESSAGE = require('./_common');
-const { confirmEmail } = require('./nodemailer');
+const {confirmEmail} = require('./nodemailer');
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -84,7 +84,8 @@ const signUp = (req, res) => {
           .catch(() => {
             const user = new Users({
               email: req.body.email,
-              statusId: 0
+              statusId: 0,
+              timestamp: Date.now()
             });
 
             user.save()
@@ -231,6 +232,39 @@ changeStatus = (req, res) => {
   )
 };
 
+const removeUnverifiedUsers = () => {
+
+  db()
+    .then(() => {
+      Users.find({statusId: 0}).stream().on('data', (data) => {
+        if (Math.abs(data.timestamp - new Date()) / 36e5 > 24) {
+          removeUser(data._id);
+        }
+      })
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const removeUser = (id) => {
+  db()
+    .then(() => {
+      Users.findByIdAndRemove(id)
+        .then((result) => {
+          console.log('Removed', result);
+        });
+
+      Credentials.findOneAndRemove({userId: id})
+        .then(credentials => {
+          console.log('Removed', credentials);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+}
+
 module.exports = {
-  signUp, logIn, verifyToken, checkToken, changeStatus
+  signUp, logIn, verifyToken, checkToken, changeStatus, removeUnverifiedUsers
 };

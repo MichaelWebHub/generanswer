@@ -2,7 +2,7 @@ const helmet = require('helmet');
 const express = require('express');
 const jsonParser = require('body-parser').json();
 
-const {signUp, logIn, verifyToken, checkToken, changeStatus} = require('./backend/auth');
+const {signUp, logIn, verifyToken, checkToken, changeStatus, removeUnverifiedUsers} = require('./backend/auth');
 const {getRooms, createRoom, deleteRoom, renameRoom} = require('./backend/rooms');
 const {getSettings, createOption, getOptions, deleteOption, editOptions, editConfig} = require('./backend/options');
 
@@ -45,6 +45,11 @@ app.get('/confirm-email/:token', verifyToken, function (req, res) {
     res.json(r);
   })
 });
+
+/** Removes unverified users every 6 hours */
+setInterval(() => {
+  removeUnverifiedUsers();
+}, 21600000);
 
 /************************** Rooms **************************/
 
