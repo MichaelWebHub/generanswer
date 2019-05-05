@@ -10,7 +10,7 @@
     </div>
 
     <div class="form__buttons">
-      <div class="form__message">{{message}}</div>
+      <div class="form__message">{{message$ | async}}</div>
       <button class="form__button" [disabled]="form.invalid">Login</button>
     </div>
 

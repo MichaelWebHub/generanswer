@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {LogInPending} from '../../_store/actions/auth.actions';
 import {IStore} from '../../_store/interfaces/store.interface';
+import {Select} from 'ngrx-actions';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,9 @@ import {IStore} from '../../_store/interfaces/store.interface';
 export class LoginComponent implements OnInit {
 
   messagePreloader = false;
-  message = '';
+
+  @Select('auth.message')
+  message$: Observable<string>;
 
   constructor(private router: Router,
               private _store: Store<IStore>) {

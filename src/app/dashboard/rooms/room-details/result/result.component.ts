@@ -19,7 +19,7 @@ export class ResultComponent implements OnInit, OnDestroy {
 
   textStartArray: string[] = [];
 
-  textStart: string;
+  textStart: string = '';
 
   /** For unsubscribe */
   control$$: Subject<boolean> = new Subject();
@@ -57,7 +57,7 @@ export class ResultComponent implements OnInit, OnDestroy {
       if (this.textStartArray[length]) {
         this.textStart = this.textStartArray[length] + '\n';
       } else {
-        this.textStart = this.textStartArray[this.textStartArray.length - 1] + '\n';
+        this.textStart = (this.textStartArray[this.textStartArray.length - 1] || '') + '\n';
       }
     }
   }

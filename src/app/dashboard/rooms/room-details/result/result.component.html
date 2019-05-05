@@ -12,7 +12,7 @@
 
   <div class="text-row" *ngFor="let option of (options$ | async); let i = index">
     <span class="text__index" *ngIf="(config$ | async).isEnumerable">{{i + 1}}.</span>
-    <pre class="text__text">{{(config$ | async).isEnumerable ? ' ' : ''}}{{option.text + '\n'}}</pre>
+    <pre class="text__text" *ngIf="option.text">{{(config$ | async).isEnumerable ? ' ' : ''}}{{option.text + '\n'}}</pre>
   </div>
 
 

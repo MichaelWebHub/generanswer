@@ -2,11 +2,11 @@
   <form class="form" #form="ngForm" (submit)="onSignUp(form)">
 
     <div class="form__row">
-      <input type="text" class="form__input--text" placeholder="Email" name="email" ngModel>
+      <input type="text" class="form__input--text" placeholder="Email" name="email" ngModel required>
     </div>
 
     <div class="form__row">
-      <input type="password" class="form__input--text" placeholder="Password" name="password" ngModel>
+      <input type="password" class="form__input--text" placeholder="Password - min 6 characters" name="password" [minLength]="6" ngModel required>
     </div>
 
     <!--<div class="form__row">-->
@@ -18,7 +18,7 @@
     <!--</div>-->
 
     <div class="form__buttons">
-      <div class="form__message">{{message}}</div>
+      <div class="form__message">{{message$ | async}}</div>
       <button class="form__button">Sign up</button>
     </div>
 

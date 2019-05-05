@@ -35,10 +35,14 @@ const logIn = (req, res) => {
                       user: user,
                       status: true,
                       token: token,
-                      message: 'Успех'
+                      message: 'Success'
                     });
                   } else {
-                    throw new Error();
+                    resolve({
+                      user: {},
+                      status: false,
+                      message: 'Wrong login or password'
+                    });
                   }
                 });
 
@@ -48,7 +52,7 @@ const logIn = (req, res) => {
             resolve({
               user: {},
               status: false,
-              message: 'Неверный логин или пароль'
+              message: 'Wrong login or password'
             });
           })
       })
@@ -56,79 +60,80 @@ const logIn = (req, res) => {
         resolve({
           user: {},
           status: false,
-          message: 'Не удалось подключиться к базе данных'
+          message: MESSAGE.error
         });
       });
   })
 };
 
 const signUp = (req, res) => {
-
   return new Promise((resolve, reject) => {
-    db()
-      .then(() => {
-        Users.findOne({email: req.body.email})
-          .then((result) => {
-            // If user already exists
-            if (result) {
-              resolve({
-                user: {},
-                status: false,
-                message: 'Пользователь с этой почтой уже зарегистрирован'
-              })
-            } else {
-              throw new Error();
-            }
+    if (req.body.email) {
+      db()
+        .then(() => {
+          Users.findOne({email: req.body.email})
+            .then((result) => {
+              // If user already exists
+              if (result) {
+                resolve({
+                  user: {},
+                  status: false,
+                  message: 'User with this email already exists'
+                })
+              } else {
+                throw new Error();
+              }
 
-          })
-          .catch(() => {
-            const user = new Users({
-              email: req.body.email,
-              statusId: 0,
-              timestamp: Date.now()
-            });
+            })
+            .catch(() => {
+              const user = new Users({
+                email: req.body.email,
+                statusId: 0,
+                timestamp: Date.now()
+              });
 
-            user.save()
-              .then(result => {
+              user.save()
+                .then(result => {
 
-                /** Create password in password table */
-                bcrypt.hash(req.body.password, saltRounds).then((hash) => {
-                  const credentials = new Credentials({
-                    userId: result._id,
-                    userPassword: hash
-                  });
-
-                  credentials.save().then(() => {
-                    const payload = {
-                      login: req.body.email,
-                      status: true
-                    };
-
-                    const token = jwt.sign(payload, 'superSecret', {
-                      expiresIn: 86400 // expires in 24 hours
+                  /** Create password in password table */
+                  bcrypt.hash(req.body.password, saltRounds).then((hash) => {
+                    const credentials = new Credentials({
+                      userId: result._id,
+                      userPassword: hash
                     });
 
-                    confirmEmail(req.body.email, token);
+                    credentials.save().then(() => {
+                      const payload = {
+                        login: req.body.email,
+                        status: true
+                      };
 
-                    resolve({
-                      user: result,
-                      status: true,
-                      token: token,
-                      message: 'Успех'
+                      const token = jwt.sign(payload, 'superSecret', {
+                        expiresIn: 86400 // expires in 24 hours
+                      });
+
+                      confirmEmail(req.body.email, token);
+
+                      resolve({
+                        user: result,
+                        status: true,
+                        token: token,
+                        message: 'Success'
+                      });
                     });
                   });
                 });
-              });
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+          resolve({
+            user: {},
+            status: false,
+            message: MESSAGE.error
           });
-      })
-      .catch((err) => {
-        console.log(err);
-        resolve({
-          user: {},
-          status: false,
-          message: MESSAGE.error
         });
-      });
+    }
   });
 };
 
